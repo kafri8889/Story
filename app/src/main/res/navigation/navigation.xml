@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/onboarding_fragment">
+
+    <fragment
+        android:id="@+id/register_fragment"
+        android:name="com.anafthdev.story.ui.register.RegisterFragment"
+        android:label="Register"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_register_fragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/onboarding_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/onboarding_fragment"
+        android:name="com.anafthdev.story.ui.onboarding.OnboardingFragment"
+        android:label="fragment_onboarding"
+        tools:layout="@layout/fragment_onboarding" >
+        <action
+            android:id="@+id/action_onboarding_fragment_to_register_fragment"
+            app:destination="@id/register_fragment" />
+        <action
+            android:id="@+id/action_onboarding_fragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_onboarding_fragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/onboarding_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.anafthdev.story.ui.login.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_register_fragment"
+            app:destination="@id/register_fragment"
+            app:popUpTo="@id/onboarding_fragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/onboarding_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.anafthdev.story.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_onboarding_fragment"
+            app:destination="@id/onboarding_fragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_homeFragment_to_newStoryFragment"
+            app:destination="@id/newStoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newStoryFragment"
+        android:name="com.anafthdev.story.ui.new_story.NewStoryFragment"
+        android:label="fragment_new_story"
+        tools:layout="@layout/fragment_new_story" />
+
+</navigation>

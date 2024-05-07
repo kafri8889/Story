@@ -1,0 +1,42 @@
+<resources>
+
+    <string name="app_name" translatable="false">Story</string>
+    <string name="story_welcome_text">Story, a social media platform designed to bring joy and excitement. Share happy moments, discover inspiring stories, and connect with a positive community. Let\'s create a happier digital world together!</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="let_s_sign_you_in">Let\'s Sign You In</string>
+    <string name="oh_hi_welcome_back">Oh, Hi! Welcome back to Story! We  hopes you always in happy vibe!</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="enter_your_username">Enter your username</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="email_not_valid">Email not valid</string>
+    <string name="dont_have_an_account">Dont have an account? Register</string>
+    <string name="already_have_an_account">Already have an account? Login</string>
+    <string name="please_fill_in">Please fill in</string>
+    <string name="digit_missing_exception_msg">Password must contain at least 1 digit</string>
+    <string name="below_min_length_exception_msg">Password must be at least 8 characters long</string>
+    <string name="lowercase_missing_exception_msg">Password must contain at least 1 lowercase letter</string>
+    <string name="uppercase_missing_exception_msg">Password must contain at least 1 uppercase letter</string>
+    <string name="lets_register_you_to_story">Let\'s Register You To Story!</string>
+    <string name="please_wait">Please wait</string>
+    <string name="registering_your_account">Registering your account</string>
+    <string name="verifying_your_credentials">Verifying your credentials</string>
+    <string name="registration_successful">Registration successful</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="picture_in_the_story">Picture in the story</string>
+    <string name="post_a_story">Post a story</string>
+    <string name="logout">Logout</string>
+    <string name="picture_of_story">Picture of story</string>
+    <string name="select_an_image">Select an image</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="upload">Upload</string>
+    <string name="rotate_image_90_degrees_to_left">Rotate image 90 degrees to left</string>
+    <string name="rotate_image_90_degrees_to_right">Rotate image 90 degrees to right</string>
+    <string name="description">Description</string>
+
+</resources>

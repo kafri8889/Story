@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:isScrollContainer="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.new_story.NewStoryFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/md_theme_surfaceContainer"
+                app:navigationIcon="@drawable/ic_rounded_arrow_back" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
+            android:layout_width="192dp"
+            android:layout_height="192dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toBottomOf="@id/appbar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_story"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/picture_of_story"
+                    android:visibility="gone" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_selectAnImage"
+                    style="@style/TextAppearance.Material3.TitleMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_an_image" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_camera"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/camera"
+            app:layout_constraintStart_toStartOf="@+id/materialCardView"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_gallery"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/gallery"
+            app:layout_constraintEnd_toEndOf="@+id/materialCardView"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_rotate_left"
+            style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:contentDescription="@string/rotate_image_90_degrees_to_left"
+            app:icon="@drawable/ic_rounded_rotate_90_degrees_left"
+            app:layout_constraintBottom_toBottomOf="@+id/button_camera"
+            app:layout_constraintEnd_toStartOf="@+id/button_camera"
+            app:layout_constraintStart_toStartOf="@+id/guideline1"
+            app:layout_constraintTop_toTopOf="@+id/button_camera" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+            android:id="@+id/button_rotate_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:contentDescription="@string/rotate_image_90_degrees_to_right"
+            app:icon="@drawable/ic_rounded_rotate_90_degrees_right"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintBottom_toBottomOf="@+id/button_gallery"
+            app:layout_constraintStart_toEndOf="@+id/button_gallery"
+            app:layout_constraintTop_toTopOf="@+id/button_gallery" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/description"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toBottomOf="@+id/button_camera">
+
+            <com.anafthdev.story.foundation.view.StoryTextField
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textMultiLine"
+                android:gravity="top"
+                android:minLines="5"
+                android:maxLines="10"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_upload"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/upload"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/til_description" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.08" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.92"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

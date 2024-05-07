@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="story_welcome_text">Story, platform media sosial yang dirancang untuk membawa keceriaan dan kegembiraan. Bagikan momen bahagia, temukan cerita inspiratif, dan terhubung dengan komunitas yang positif. Mari ciptakan dunia digital yang lebih ceria bersama!</string>
+    <string name="register">Daftar</string>
+    <string name="login">Masuk</string>
+    <string name="let_s_sign_you_in">Ayo Daftarkan Anda</string>
+    <string name="oh_hi_welcome_back">Oh, Hai! Selamat datang kembali di Story! Kami semoga kamu selalu dalam suasana bahagia!</string>
+    <string name="username">Nama pengguna</string>
+    <string name="email">Email</string>
+    <string name="password">Kata sandi</string>
+    <string name="remember_me">Ingat saya</string>
+    <string name="enter_your_username">Masukkan nama pengguna anda</string>
+    <string name="enter_your_email">Masukkan email anda</string>
+    <string name="enter_your_password">Masukkan password anda</string>
+    <string name="email_not_valid">Email tidak valid</string>
+    <string name="dont_have_an_account">Tidak punya akun? Daftar</string>
+    <string name="already_have_an_account">Sudah punya akun? Masuk</string>
+    <string name="please_fill_in">Tolong isi</string>
+    <string name="digit_missing_exception_msg">Kata sandi harus berisi minimal 1 angka</string>
+    <string name="below_min_length_exception_msg">Kata sandi harus berisi minimal 8 karakter</string>
+    <string name="lowercase_missing_exception_msg">Kata sandi harus berisi minimal 1 huruf kecil</string>
+    <string name="uppercase_missing_exception_msg">Kata sandi harus berisi minimal 1 huruf besar</string>
+    <string name="lets_register_you_to_story">Ayo Daftarkan Anda Ke Story!</string>
+    <string name="please_wait">Mohon tunggu</string>
+    <string name="registering_your_account">Mendaftarkan akun anda</string>
+    <string name="verifying_your_credentials">Memverifikasi kredensial anda</string>
+    <string name="registration_successful">Registrasi berhasil</string>
+    <string name="cancelled">Dibatalkan</string>
+    <string name="picture_in_the_story">Gambar di cerita</string>
+    <string name="post_a_story">Posting cerita</string>
+    <string name="logout">Keluar</string>
+    <string name="picture_of_story">Gambar cerita</string>
+    <string name="select_an_image">Pilih gambar</string>
+    <string name="camera">Kamera</string>
+    <string name="gallery">Galeri</string>
+    <string name="upload">Unggah</string>
+    <string name="rotate_image_90_degrees_to_left">Putar gambar 90 derajat ke kiri</string>
+    <string name="rotate_image_90_degrees_to_right">Putar gambar 90 derajat ke kanan</string>
+    <string name="description">Deskripsi</string>
+</resources>
