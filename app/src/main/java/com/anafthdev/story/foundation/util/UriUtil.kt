@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.core.content.FileProvider
 import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
 
 object UriUtil {
 
@@ -17,6 +19,18 @@ object UriUtil {
 
     fun uriToBitmap(context: Context, uri: Uri): Bitmap? {
         return BitmapFactory.decodeStream(context.contentResolver.openInputStream(uri))
+    }
+
+    fun uriToFile(context: Context, uri: Uri): File {
+        val file = File.createTempFile(System.currentTimeMillis().toString(), ".jpg", context.cacheDir)
+        val inputStream = context.contentResolver.openInputStream(uri) as InputStream
+        val outputStream = FileOutputStream(file)
+        val buffer = ByteArray(1024)
+        var length: Int
+        while (inputStream.read(buffer).also { length = it } > 0) outputStream.write(buffer, 0, length)
+        outputStream.close()
+        inputStream.close()
+        return file
     }
 
 }

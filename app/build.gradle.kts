@@ -161,7 +161,6 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10")
     implementation("com.jakewharton.timber:timber:5.0.1")
     implementation("com.squareup.wire:wire-runtime:4.4.3")
-    implementation("com.github.techinessoverloaded:progress-dialog:1.5.1")
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
 //    testImplementation(libs.junit)

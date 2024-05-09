@@ -1,5 +1,6 @@
 package com.anafthdev.story.ui.login
 
+import android.app.Dialog
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.text.style.ClickableSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -24,12 +26,12 @@ import com.anafthdev.story.R
 import com.anafthdev.story.data.model.LoginResult
 import com.anafthdev.story.data.model.UserCredential
 import com.anafthdev.story.databinding.FragmentLoginBinding
+import com.anafthdev.story.databinding.LoadingDialogBinding
 import com.anafthdev.story.foundation.common.EmailValidator
 import com.anafthdev.story.foundation.common.PasswordValidator
 import com.anafthdev.story.foundation.extension.toast
 import com.anafthdev.story.foundation.worker.WorkerUtil
 import com.google.gson.Gson
-import com.techiness.progressdialoglibrary.ProgressDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
@@ -44,16 +46,23 @@ class LoginFragment : Fragment() {
     @Inject lateinit var workManager: WorkManager
 
     private lateinit var binding: FragmentLoginBinding
-    private lateinit var progressDialog: ProgressDialog
+    private lateinit var progressDialog: Dialog
 
     private val viewModel: LoginViewModel by viewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        progressDialog = ProgressDialog(ProgressDialog.MODE_INDETERMINATE, context).apply {
-            setTitle(context.getString(R.string.verifying_your_credentials))
-            setMessage(context.getString(R.string.please_wait))
+        progressDialog = Dialog(context).apply {
+            window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            setContentView(
+                LoadingDialogBinding.inflate(layoutInflater).apply {
+                    tvTitle.text = context.getString(com.anafthdev.story.R.string.verifying_your_credentials)
+                    tvText.text = context.getString(com.anafthdev.story.R.string.please_wait)
+                }.root
+            )
         }
     }
 
