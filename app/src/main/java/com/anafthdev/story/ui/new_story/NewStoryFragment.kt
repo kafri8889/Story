@@ -77,6 +77,8 @@ class NewStoryFragment : Fragment() {
             window?.setBackgroundDrawableResource(android.R.color.transparent)
 
             requestWindowFeature(Window.FEATURE_NO_TITLE)
+            setCancelable(false)
+            setCanceledOnTouchOutside(false)
             setContentView(
                 LoadingDialogBinding.inflate(layoutInflater).apply {
                     tvTitle.text = context.getString(com.anafthdev.story.R.string.uploading_story)
@@ -137,6 +139,7 @@ class NewStoryFragment : Fragment() {
                 binding.tvSelectAnImage.visibility = View.GONE
                 binding.buttonRotateLeft.isEnabled = true
                 binding.buttonRotateRight.isEnabled = true
+                binding.materialCardView.strokeWidth = 0
 
                 Glide.with(requireContext())
                     .load(bitmap)

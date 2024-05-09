@@ -30,7 +30,7 @@
             android:id="@+id/tv_letsSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/let_s_sign_you_in"
+            android:text="@string/let_s_sign_you_in_to_story"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +82,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Space
+        <View
             android:layout_width="wrap_content"
             android:layout_height="8dp"/>
 
@@ -108,7 +108,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Space
+        <View
             android:layout_width="wrap_content"
             android:layout_height="8dp"/>
 
@@ -152,7 +152,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5"/>
+        app:layout_constraintGuide_percent="0.6"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"

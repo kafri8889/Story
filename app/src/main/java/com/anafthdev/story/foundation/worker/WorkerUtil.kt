@@ -19,13 +19,20 @@ object WorkerUtil {
      */
     inline fun tryWork(
         extraErrorMsg: String,
+        onSocketTimeout: () -> ListenableWorker.Result = {
+            ListenableWorker.Result.failure(
+                workDataOf(
+                    EXTRA_ERROR_MESSAGE to "Request timeout"
+                )
+            )
+        },
         block: () -> ListenableWorker.Result
     ): ListenableWorker.Result {
         return try {
             block()
         } catch (e: SocketTimeoutException) {
             Timber.e(e, e.message)
-            ListenableWorker.Result.retry()
+            onSocketTimeout()
         } catch (e: Exception) {
             Timber.e(e, e.message)
             ListenableWorker.Result.failure(

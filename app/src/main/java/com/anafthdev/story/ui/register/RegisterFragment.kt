@@ -55,6 +55,8 @@ class RegisterFragment : Fragment() {
             window?.setBackgroundDrawableResource(android.R.color.transparent)
 
             requestWindowFeature(Window.FEATURE_NO_TITLE)
+            setCancelable(false)
+            setCanceledOnTouchOutside(false)
             setContentView(
                 LoadingDialogBinding.inflate(layoutInflater).apply {
                     tvTitle.text = context.getString(R.string.registering_your_account)
@@ -169,39 +171,17 @@ class RegisterFragment : Fragment() {
         }
 
         tfUsername.apply {
-            setTrailingIcon {
-                ContextCompat.getDrawable(
-                    context,
-                    R.drawable.ic_rounded_close
-                ) as Drawable
-            }
-
             addOnTextChangedListener { s ->
                 viewModel.setUsername(s.toString())
-
-                if (s.isBlank()) hideTrailingIcon() else showTrailingIcon()
             }
-
-            setOnTrailingIconClickListener { text?.clear() }
 
             addValidator("empty_text", EmptyTextValidator())
         }
 
         tfEmail.apply {
-            setTrailingIcon {
-                ContextCompat.getDrawable(
-                    context,
-                    R.drawable.ic_rounded_close
-                ) as Drawable
-            }
-
             addOnTextChangedListener { s ->
                 viewModel.setEmail(s.toString())
-
-                if (s.isBlank()) hideTrailingIcon() else showTrailingIcon()
             }
-
-            setOnTrailingIconClickListener { text?.clear() }
 
             addValidator("email", EmailValidator())
         }

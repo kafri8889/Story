@@ -57,6 +57,8 @@ class LoginFragment : Fragment() {
             window?.setBackgroundDrawableResource(android.R.color.transparent)
 
             requestWindowFeature(Window.FEATURE_NO_TITLE)
+            setCancelable(false)
+            setCanceledOnTouchOutside(false)
             setContentView(
                 LoadingDialogBinding.inflate(layoutInflater).apply {
                     tvTitle.text = context.getString(com.anafthdev.story.R.string.verifying_your_credentials)
@@ -183,20 +185,9 @@ class LoginFragment : Fragment() {
         }
 
         tfEmail.apply {
-            setTrailingIcon {
-                ContextCompat.getDrawable(
-                    context,
-                    R.drawable.ic_rounded_close
-                ) as Drawable
-            }
-
             addOnTextChangedListener { s ->
                 viewModel.setEmail(s.toString())
-
-                if (s.isBlank()) hideTrailingIcon() else showTrailingIcon()
             }
-
-            setOnTrailingIconClickListener { text?.clear() }
 
             addValidator("email", EmailValidator())
         }

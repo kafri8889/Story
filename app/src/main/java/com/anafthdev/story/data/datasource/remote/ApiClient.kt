@@ -5,6 +5,7 @@ import com.anafthdev.story.foundation.common.SessionManager
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import java.util.concurrent.TimeUnit
 
 object ApiClient {
 
@@ -30,6 +31,9 @@ object ApiClient {
 
     fun getClient(sessionManager: SessionManager): OkHttpClient {
         return OkHttpClient.Builder()
+            .readTimeout(20, TimeUnit.SECONDS)
+            .connectTimeout(20, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
             .addInterceptor(getAuthInterceptor(sessionManager))
             .addInterceptor(loggingInterceptor)
             .build()

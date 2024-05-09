@@ -56,9 +56,10 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun logout() {
+    fun logout(onLogout: () -> Unit) {
         viewModelScope.launch {
             userCredentialRepository.clear()
+            onLogout()
         }
     }
 
