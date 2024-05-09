@@ -1,5 +1,6 @@
 package com.anafthdev.story.ui.register
 
+import android.app.Dialog
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.text.style.ClickableSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -22,12 +24,12 @@ import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.anafthdev.story.R
 import com.anafthdev.story.databinding.FragmentRegisterBinding
+import com.anafthdev.story.databinding.LoadingDialogBinding
 import com.anafthdev.story.foundation.common.EmailValidator
 import com.anafthdev.story.foundation.common.EmptyTextValidator
 import com.anafthdev.story.foundation.common.PasswordValidator
 import com.anafthdev.story.foundation.extension.toast
 import com.anafthdev.story.foundation.worker.WorkerUtil
-import com.techiness.progressdialoglibrary.ProgressDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
@@ -42,16 +44,23 @@ class RegisterFragment : Fragment() {
     @Inject lateinit var workManager: WorkManager
 
     private lateinit var binding: FragmentRegisterBinding
-    private lateinit var progressDialog: ProgressDialog
+    private lateinit var progressDialog: Dialog
 
     private val viewModel: RegisterViewModel by viewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        progressDialog = ProgressDialog(ProgressDialog.MODE_INDETERMINATE, context).apply {
-            setTitle(context.getString(R.string.registering_your_account))
-            setMessage(context.getString(R.string.please_wait))
+        progressDialog = Dialog(context).apply {
+            window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            setContentView(
+                LoadingDialogBinding.inflate(layoutInflater).apply {
+                    tvTitle.text = context.getString(R.string.registering_your_account)
+                    tvText.text = context.getString(R.string.please_wait)
+                }.root
+            )
         }
     }
 

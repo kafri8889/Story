@@ -32,7 +32,7 @@ class HomeViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             storyRepository.getAllStoriesFromDb().collectLatest { storyList ->
-                _stories.value = storyList
+                _stories.value = storyList.sortedByDescending { it.createdAt } // Sort by latest
             }
         }
     }

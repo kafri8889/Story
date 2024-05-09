@@ -1,5 +1,6 @@
 package com.anafthdev.story.foundation.worker
 
+import android.net.Uri
 import androidx.work.Constraints
 import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequest
@@ -45,6 +46,22 @@ object Workers {
             .setInputData(
                 workDataOf(
                     LoginWorker.EXTRA_REQUEST_BODY to Gson().toJson(body)
+                )
+            )
+            .build()
+    }
+
+    fun postStory(imageUri: Uri, description: String): OneTimeWorkRequest {
+        return OneTimeWorkRequestBuilder<PostStoryWorker>()
+            .setConstraints(
+                Constraints(
+                    requiredNetworkType = NetworkType.CONNECTED
+                )
+            )
+            .setInputData(
+                workDataOf(
+                    PostStoryWorker.EXTRA_IMAGE_URI to imageUri.toString(),
+                    PostStoryWorker.EXTRA_IMAGE_DESCRIPTION to description
                 )
             )
             .build()

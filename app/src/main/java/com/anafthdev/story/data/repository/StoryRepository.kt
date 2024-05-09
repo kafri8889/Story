@@ -4,9 +4,12 @@ import com.anafthdev.story.data.model.Story
 import com.anafthdev.story.data.model.body.LoginRequestBody
 import com.anafthdev.story.data.model.body.RegisterRequestBody
 import com.anafthdev.story.data.model.response.LoginResponse
+import com.anafthdev.story.data.model.response.PostStoryResponse
 import com.anafthdev.story.data.model.response.RegisterResponse
 import com.anafthdev.story.data.model.response.StoriesResponse
 import kotlinx.coroutines.flow.Flow
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 
 interface StoryRepository {
@@ -20,6 +23,11 @@ interface StoryRepository {
      * Login
      */
     suspend fun login(body: LoginRequestBody): Response<LoginResponse>
+
+    /**
+     * Post story to server
+     */
+    suspend fun postStory(file: MultipartBody.Part, description: RequestBody): Response<PostStoryResponse>
 
     /**
      * Get all stories
