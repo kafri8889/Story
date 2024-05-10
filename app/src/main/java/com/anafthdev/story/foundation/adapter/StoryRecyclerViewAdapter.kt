@@ -4,6 +4,8 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -25,7 +27,7 @@ class StoryRecyclerViewAdapter: ListAdapter<Story, StoryRecyclerViewAdapter.Stor
 
     override fun onBindViewHolder(holder: StoryViewHolder, position: Int) {
 
-        holder.bind(currentList[position])
+        holder.bind(position, currentList[position])
     }
 
     fun setOnItemClickListener(onItemClickListener: OnItemClickListener<Story>) {
@@ -33,9 +35,21 @@ class StoryRecyclerViewAdapter: ListAdapter<Story, StoryRecyclerViewAdapter.Stor
     }
 
     inner class StoryViewHolder(
-        private val binding: StoryItemBinding
+        val binding: StoryItemBinding
     ): RecyclerView.ViewHolder(binding.root) {
-        fun bind(story: Story) = with(binding) {
+        fun bind(position: Int, story: Story) = with(binding) {
+            ViewCompat.setTransitionName(ivStory, "story_image_${story.id}")
+            ViewCompat.setTransitionName(tvName, "story_username_${story.id}")
+            ViewCompat.setTransitionName(tvDescription, "story_description_${story.id}")
+            ViewCompat.setTransitionName(tvDate, "story_date_${story.id}")
+
+            val extras = FragmentNavigatorExtras(
+                ivStory to "story_image_${story.id}",
+                tvName to "story_username_${story.id}",
+                tvDescription to "story_description_${story.id}",
+                tvDate to "story_date_${story.id}",
+            )
+
             tvName.text = story.name
             tvDescription.text = story.description
             tvDate.text = DateFormat.getDateInstance(DateFormat.FULL).format(
@@ -43,7 +57,7 @@ class StoryRecyclerViewAdapter: ListAdapter<Story, StoryRecyclerViewAdapter.Stor
             )
 
             root.setOnClickListener {
-                onItemClickListener?.onItemClick(story)
+                onItemClickListener?.onItemClick(position, story, extras)
             }
 
             Glide.with(root.context)

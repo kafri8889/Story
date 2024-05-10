@@ -60,11 +60,23 @@
         <action
             android:id="@+id/action_homeFragment_to_newStoryFragment"
             app:destination="@id/newStoryFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_storyDetailFragment"
+            app:destination="@id/storyDetailFragment"/>
     </fragment>
     <fragment
         android:id="@+id/newStoryFragment"
         android:name="com.anafthdev.story.ui.new_story.NewStoryFragment"
         android:label="fragment_new_story"
         tools:layout="@layout/fragment_new_story" />
+    <fragment
+        android:id="@+id/storyDetailFragment"
+        android:name="com.anafthdev.story.ui.story_detail.StoryDetailFragment"
+        android:label="fragment_story_detail"
+        tools:layout="@layout/fragment_story_detail">
+        <argument
+            android:name="story"
+            app:argType="string"/>
+    </fragment>
 
 </navigation>

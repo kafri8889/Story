@@ -5,6 +5,7 @@ buildscript {
         classpath("com.android.tools.build:gradle:8.4.0")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
         classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlin_version")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.7.7")
         classpath("com.google.dagger:hilt-android-gradle-plugin:2.48")
         classpath("com.squareup.wire:wire-gradle-plugin:4.4.3")
     }

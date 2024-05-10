@@ -11,6 +11,7 @@ plugins {
     id("com.squareup.wire")
     id("com.google.devtools.ksp")
     id("org.jetbrains.kotlin.plugin.serialization")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {

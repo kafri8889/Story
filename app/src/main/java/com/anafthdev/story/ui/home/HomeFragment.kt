@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.anafthdev.story.R
 import com.anafthdev.story.databinding.FragmentHomeBinding
 import com.anafthdev.story.foundation.adapter.StoryRecyclerViewAdapter
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -47,14 +48,36 @@ class HomeFragment: Fragment() {
 
     private fun initView() = with(binding) {
         storyAdapter = StoryRecyclerViewAdapter().apply {
-            setOnItemClickListener { story ->
+            setOnItemClickListener { pos, story, extras ->
+                val vh = rvStories.findViewHolderForAdapterPosition(pos) as? StoryRecyclerViewAdapter.StoryViewHolder
 
+                vh?.let {
+                    findNavController().navigate(
+                        navigatorExtras = extras!!,
+                        directions = HomeFragmentDirections.actionHomeFragmentToStoryDetailFragment(
+                            Gson().toJson(story)
+                        )
+                    )
+
+                    return@setOnItemClickListener
+                }
+
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragmentToStoryDetailFragment(
+                        Gson().toJson(story)
+                    )
+                )
             }
         }
 
         rvStories.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = storyAdapter
+            postponeEnterTransition()
+            viewTreeObserver.addOnPreDrawListener {
+                startPostponedEnterTransition()
+                true
+            }
         }
 
         toolbar.setOnMenuItemClickListener { menuItem ->
