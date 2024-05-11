@@ -1,0 +1,12 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Preference
+        app:key="language"
+        app:icon="@drawable/ic_rounded_translate"
+        app:title="@string/language"/>
+
+    <Preference
+        app:key="logout"
+        app:title="@string/logout"/>
+
+</PreferenceScreen>

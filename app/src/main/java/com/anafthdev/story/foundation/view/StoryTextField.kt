@@ -115,10 +115,6 @@ class StoryTextField @JvmOverloads constructor(
         validators.add(tag to validator)
     }
 
-    fun removeValidator(tag: String) {
-        validators.removeIf { it.first == tag }
-    }
-
     fun interface OnTextChanged {
         fun onTextChanged(s: CharSequence)
     }

@@ -47,7 +47,7 @@ class NewStoryFragment : Fragment() {
     private val viewModel: NewStoryViewModel by viewModels()
 
     /**
-     * Temp uri yang digunakan untuk mengambil gambar dari kamera yang akan ditampilkan ke selected image
+     * Temp uri yang digunakan untuk menampung gambar yang diambil dari kamera yang akan ditampilkan ke selected image
      */
     private var tempUri: Uri = Uri.EMPTY
 

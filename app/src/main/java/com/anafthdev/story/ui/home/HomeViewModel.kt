@@ -9,7 +9,6 @@ import androidx.work.Operation
 import androidx.work.WorkManager
 import com.anafthdev.story.data.model.Story
 import com.anafthdev.story.data.repository.StoryRepository
-import com.anafthdev.story.data.repository.UserCredentialRepository
 import com.anafthdev.story.foundation.worker.Workers
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -18,7 +17,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val userCredentialRepository: UserCredentialRepository,
     private val storyRepository: StoryRepository,
     private val workManager: WorkManager
 ): ViewModel() {
@@ -53,13 +51,6 @@ class HomeViewModel @Inject constructor(
                     }
                 }
             })
-        }
-    }
-
-    fun logout(onLogout: () -> Unit) {
-        viewModelScope.launch {
-            userCredentialRepository.clear()
-            onLogout()
         }
     }
 
