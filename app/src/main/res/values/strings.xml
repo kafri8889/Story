@@ -45,4 +45,7 @@
     <string name="language">Language</string>
     <string name="indonesian">Indonesian</string>
     <string name="english">English</string>
+    <string name="appwidget_text">Stories</string>
+    <string name="empty_text">No story</string>
+    <string name="refresh">Refresh</string>
 </resources>

@@ -11,6 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.util.Locale
 
 @AndroidEntryPoint
@@ -29,7 +30,11 @@ abstract class LocalizedActivity: AppCompatActivity() {
 						val lang = checkLanguage(language)
 						val newLocale = Locale(lang.code)
 
-						viewModel.setLanguage(lang)
+						Timber.d("Language changed from $language to $lang")
+
+						if (lang != language && lang != Language.Undefined) {
+							viewModel.setLanguage(lang)
+						}
 
 						if (newLocale.language != currentLocale?.language) {
 							currentLocale = newLocale
@@ -37,9 +42,9 @@ abstract class LocalizedActivity: AppCompatActivity() {
 								context = this@LocalizedActivity,
 								locale = currentLocale
 							)
-						}
 
-						listener?.onChanged()
+							listener?.onChanged()
+						}
 					}
 			}
 		}

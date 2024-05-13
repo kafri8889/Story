@@ -44,4 +44,7 @@
     <string name="language">Bahasa</string>
     <string name="indonesian">Indonesia</string>
     <string name="english">Inggris</string>
+    <string name="appwidget_text">Cerita</string>
+    <string name="empty_text">Tidak ada cerita</string>
+    <string name="refresh">Muat ulang</string>
 </resources>

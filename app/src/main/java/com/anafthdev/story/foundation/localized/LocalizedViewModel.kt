@@ -8,7 +8,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,13 +16,13 @@ class LocalizedViewModel @Inject constructor(
     private val userPreferenceRepository: UserPreferenceRepository
 ): ViewModel() {
 
-    private val _language = MutableStateFlow(Language.Undefined)
-    val language: StateFlow<Language> = _language
+    private val _language = MutableStateFlow<Language?>(null)
+    val language: StateFlow<Language?> = _language
 
     init {
         viewModelScope.launch {
             userPreferenceRepository.userPreferences.collectLatest { pref ->
-                _language.update { pref.language }
+                _language.emit(pref.language)
             }
         }
     }
