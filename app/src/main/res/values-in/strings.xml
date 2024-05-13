@@ -42,4 +42,6 @@
     <string name="uploading_story">Mengunggah cerita</string>
     <string name="settings">Pengaturan</string>
     <string name="language">Bahasa</string>
+    <string name="indonesian">Indonesia</string>
+    <string name="english">Inggris</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.anafthdev.story.ui.settings
 
-import android.os.Build.VERSION_CODES.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +7,11 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.anafthdev.story.R
+import com.anafthdev.story.data.Language
 import com.anafthdev.story.databinding.ToolbarBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,6 +34,12 @@ class SettingsFragment: PreferenceFragmentCompat() {
             }
             .root
             .let { root.addView(it, 0) }
+
+        viewModel.language.observe(viewLifecycleOwner) { language ->
+            findPreference<ListPreference>("language")?.value = if (language == Language.Undefined) {
+                Language.English.code
+            } else language.code
+        }
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -45,6 +52,23 @@ class SettingsFragment: PreferenceFragmentCompat() {
                 }
 
                 return@setOnPreferenceClickListener true
+            }
+        }
+
+        findPreference<ListPreference>("language")?.apply {
+            setOnPreferenceChangeListener { _, newValue ->
+                var language = Language.Undefined
+                val languages = resources.getStringArray(R.array.language_values)
+
+                for (i in languages.indices) {
+                    if (languages[i] == newValue.toString()) {
+                        language = Language.entries[i]
+                        break
+                    }
+                }
+
+                viewModel.setLanguage(language)
+                true
             }
         }
     }

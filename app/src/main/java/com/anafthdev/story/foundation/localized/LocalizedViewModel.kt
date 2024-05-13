@@ -1,30 +1,29 @@
-package com.anafthdev.story.ui.settings
+package com.anafthdev.story.foundation.localized
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.anafthdev.story.data.Language
-import com.anafthdev.story.data.repository.UserCredentialRepository
 import com.anafthdev.story.data.repository.UserPreferenceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SettingsViewModel @Inject constructor(
-    private val userCredentialRepository: UserCredentialRepository,
+class LocalizedViewModel @Inject constructor(
     private val userPreferenceRepository: UserPreferenceRepository
 ): ViewModel() {
 
-    private val _language = MutableLiveData(Language.Undefined)
-    val language: LiveData<Language> = _language
+    private val _language = MutableStateFlow(Language.Undefined)
+    val language: StateFlow<Language> = _language
 
     init {
         viewModelScope.launch {
             userPreferenceRepository.userPreferences.collectLatest { pref ->
-                _language.postValue(pref.language)
+                _language.update { pref.language }
             }
         }
     }
@@ -35,10 +34,4 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    fun logout(onLogout: () -> Unit) {
-        viewModelScope.launch {
-            userCredentialRepository.clear()
-            onLogout()
-        }
-    }
 }

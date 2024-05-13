@@ -84,7 +84,7 @@
             android:id="@+id/action_settingsFragment_to_onboarding_fragment"
             app:launchSingleTop="true"
             app:destination="@id/onboarding_fragment"
-            app:popUpTo="@id/settingsFragment"
+            app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
     </fragment>
 

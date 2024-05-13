@@ -92,7 +92,7 @@ class HomeFragment: Fragment() {
         }
 
         fabPostStory.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_newStoryFragment)
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNewStoryFragment())
         }
 
         swipeRefreshLayout.setOnRefreshListener {
