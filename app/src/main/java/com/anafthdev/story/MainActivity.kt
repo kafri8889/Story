@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
@@ -15,10 +14,11 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.anafthdev.story.data.model.UserCredential
 import com.anafthdev.story.databinding.ActivityMainBinding
+import com.anafthdev.story.foundation.localized.LocalizedActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity: LocalizedActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
@@ -58,6 +58,13 @@ class MainActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        setOnLocaleChangedListener {
+            // Refresh fragment jika bahasa berubah
+            val id = navController.currentDestination?.id
+            navController.popBackStack(id!!,true)
+            navController.navigate(id)
         }
     }
 
