@@ -61,10 +61,14 @@ class MainActivity: LocalizedActivity() {
         }
 
         setOnLocaleChangedListener {
-            // Refresh fragment jika bahasa berubah
-            val id = navController.currentDestination?.id
-            navController.popBackStack(id!!,true)
-            navController.navigate(id)
+            when (navController.currentDestination?.id) {
+                R.id.onboarding_fragment, R.id.settingsFragment -> {
+                    // Refresh fragment jika bahasa berubah
+                    val id = navController.currentDestination?.id
+                    navController.popBackStack(id!!,true)
+                    navController.navigate(id)
+                }
+            }
         }
     }
 

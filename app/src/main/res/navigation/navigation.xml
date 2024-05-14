@@ -57,6 +57,8 @@
             app:destination="@id/newStoryFragment" />
         <action
             android:id="@+id/action_homeFragment_to_storyDetailFragment"
+            app:launchSingleTop="true"
+            app:restoreState="true"
             app:destination="@id/storyDetailFragment"/>
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
@@ -74,7 +76,8 @@
         tools:layout="@layout/fragment_story_detail">
         <argument
             android:name="story"
-            app:argType="string"/>
+            app:argType="string"
+            android:defaultValue=""/>
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

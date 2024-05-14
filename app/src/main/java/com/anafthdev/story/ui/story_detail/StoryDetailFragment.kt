@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.transition.TransitionInflater
 import com.anafthdev.story.data.model.Story
@@ -21,9 +23,9 @@ import java.time.Instant
 class StoryDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentStoryDetailBinding
-    private lateinit var story: Story
 
     private val args: StoryDetailFragmentArgs by navArgs()
+    private val viewModel: StoryDetailViewModel by viewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -34,7 +36,10 @@ class StoryDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        story = Gson().fromJson(args.story, Story::class.java)
+        if (args.story.isNotBlank()) {
+            viewModel.setStory(Gson().fromJson(args.story, Story::class.java))
+        }
+
 
         binding = FragmentStoryDetailBinding.inflate(inflater, container, false)
         return binding.root
@@ -44,22 +49,33 @@ class StoryDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
+
+        viewModel.story.observe(viewLifecycleOwner) { story ->
+            updateView(story)
+        }
     }
 
     private fun initView() = with(binding) {
-        ViewCompat.setTransitionName(ivStory, "story_image_${story.id}")
-        ViewCompat.setTransitionName(tvName, "story_username_${story.id}")
-        ViewCompat.setTransitionName(tvDescription, "story_description_${story.id}")
-        ViewCompat.setTransitionName(tvDate, "story_date_${story.id}")
+        toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+    }
+
+    private fun updateView(story: Story?) = with(binding) {
+        ViewCompat.setTransitionName(ivStory, "story_image_${story?.id}")
+        ViewCompat.setTransitionName(tvName, "story_username_${story?.id}")
+        ViewCompat.setTransitionName(tvDescription, "story_description_${story?.id}")
+        ViewCompat.setTransitionName(tvDate, "story_date_${story?.id}")
 
         Glide.with(requireContext())
-            .load(story.photoUrl)
+            .load(story?.photoUrl)
             .into(ivStory)
 
-        tvName.text = story.name
-        tvDescription.text = story.description
+        tvName.text = story?.name
+        tvDescription.text = story?.description
         tvDate.text = DateFormat.getDateInstance(DateFormat.FULL).format(
-            Instant.parse(story.createdAt).toEpochMilli()
+            if (story != null) Instant.parse(story.createdAt).toEpochMilli()
+            else 0
         )
     }
 }
