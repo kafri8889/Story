@@ -8,7 +8,6 @@
     <string name="username">Nama pengguna</string>
     <string name="email">Email</string>
     <string name="password">Kata sandi</string>
-    <string name="remember_me">Ingat saya</string>
     <string name="enter_your_username">Masukkan nama pengguna anda</string>
     <string name="enter_your_email">Masukkan email anda</string>
     <string name="enter_your_password">Masukkan password anda</string>

@@ -37,9 +37,6 @@ class LoginViewModel @Inject constructor(
     private val _enableLoginButton = MutableLiveData(false)
     val enableLoginButton: LiveData<Boolean> = _enableLoginButton
 
-    private val _rememberMe = MutableLiveData(false)
-    val rememberMe: LiveData<Boolean> = _rememberMe
-
     private val _isLoading = MutableLiveData(false)
     val isLoading: LiveData<Boolean> = _isLoading
 
@@ -61,10 +58,6 @@ class LoginViewModel @Inject constructor(
 
     fun setShowPassword(show: Boolean) {
         _showPassword.value = show
-    }
-
-    fun setRememberMe(remember: Boolean) {
-        _rememberMe.value = remember
     }
 
     fun setLoading(isLoading: Boolean) {

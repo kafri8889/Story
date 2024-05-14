@@ -98,19 +98,17 @@ class LoginFragment : Fragment() {
 
                         viewModel.setLoading(false)
 
-                        if (viewModel.rememberMe.value == true) {
-                            // Save credential
-                            viewModel.saveCredential(
-                                UserCredential(
-                                    username = loginResult.name,
-                                    userId = loginResult.userId,
-                                    token = loginResult.token,
-                                    email = viewModel.email.value ?: ""
-                                )
-                            ) {
-                                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                            }
-                        } else findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                        // Save credential
+                        viewModel.saveCredential(
+                            UserCredential(
+                                username = loginResult.name,
+                                userId = loginResult.userId,
+                                token = loginResult.token,
+                                email = viewModel.email.value ?: ""
+                            )
+                        ) {
+                            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                        }
                     }
                     WorkInfo.State.FAILED -> {
                         viewModel.setLoading(false)
@@ -211,10 +209,6 @@ class LoginFragment : Fragment() {
             }
 
             addValidator("password", PasswordValidator())
-        }
-
-        cbRememberMe.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.setRememberMe(isChecked)
         }
 
         buttonLogin.setOnClickListener {
