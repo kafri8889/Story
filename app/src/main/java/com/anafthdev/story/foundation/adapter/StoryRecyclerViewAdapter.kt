@@ -2,7 +2,6 @@ package com.anafthdev.story.foundation.adapter
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anafthdev.story.data.model.Story
 import com.anafthdev.story.databinding.StoryItemBinding
 import com.anafthdev.story.foundation.common.OnItemClickListener
+import com.anafthdev.story.foundation.extension.viewBinding
 import com.bumptech.glide.Glide
 import java.text.DateFormat
 import java.time.Instant
@@ -21,8 +21,7 @@ class StoryRecyclerViewAdapter: ListAdapter<Story, StoryRecyclerViewAdapter.Stor
     private var onItemClickListener: OnItemClickListener<Story>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoryViewHolder {
-        val binding = StoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return StoryViewHolder(binding)
+        return StoryViewHolder(parent.viewBinding(StoryItemBinding::inflate))
     }
 
     override fun onBindViewHolder(holder: StoryViewHolder, position: Int) {
@@ -35,7 +34,7 @@ class StoryRecyclerViewAdapter: ListAdapter<Story, StoryRecyclerViewAdapter.Stor
     }
 
     inner class StoryViewHolder(
-        val binding: StoryItemBinding
+        private val binding: StoryItemBinding
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int, story: Story) = with(binding) {
             ViewCompat.setTransitionName(ivStory, "story_image_${story.id}")

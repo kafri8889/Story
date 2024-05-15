@@ -4,9 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.Window
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
@@ -18,11 +16,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
+import com.anafthdev.story.R
 import com.anafthdev.story.databinding.FragmentNewStoryBinding
 import com.anafthdev.story.databinding.LoadingDialogBinding
 import com.anafthdev.story.foundation.extension.getRotatedBitmap
 import com.anafthdev.story.foundation.extension.reduceSize
 import com.anafthdev.story.foundation.extension.toast
+import com.anafthdev.story.foundation.extension.viewBinding
 import com.anafthdev.story.foundation.util.UriUtil
 import com.anafthdev.story.foundation.worker.WorkerUtil
 import com.bumptech.glide.Glide
@@ -37,14 +37,14 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class NewStoryFragment : Fragment() {
+class NewStoryFragment : Fragment(R.layout.fragment_new_story) {
 
     @Inject lateinit var workManager: WorkManager
 
-    private lateinit var binding: FragmentNewStoryBinding
     private lateinit var progressDialog: Dialog
 
     private val viewModel: NewStoryViewModel by viewModels()
+    private val binding: FragmentNewStoryBinding by viewBinding(FragmentNewStoryBinding::bind)
 
     /**
      * Temp uri yang digunakan untuk menampung gambar yang diambil dari kamera yang akan ditampilkan ke selected image
@@ -81,19 +81,11 @@ class NewStoryFragment : Fragment() {
             setCanceledOnTouchOutside(false)
             setContentView(
                 LoadingDialogBinding.inflate(layoutInflater).apply {
-                    tvTitle.text = context.getString(com.anafthdev.story.R.string.uploading_story)
-                    tvText.text = context.getString(com.anafthdev.story.R.string.please_wait)
+                    tvTitle.text = context.getString(R.string.uploading_story)
+                    tvText.text = context.getString(R.string.please_wait)
                 }.root
             )
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentNewStoryBinding.inflate(inflater, container, false)
-        return binding.root
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -126,7 +118,7 @@ class NewStoryFragment : Fragment() {
                     }
                     WorkInfo.State.CANCELLED -> {
                         viewModel.setLoading(false)
-                        requireContext().toast(requireContext().getString(com.anafthdev.story.R.string.cancelled))
+                        requireContext().toast(requireContext().getString(R.string.cancelled))
                     }
                     else -> {}
                 }
@@ -181,12 +173,12 @@ class NewStoryFragment : Fragment() {
 
         buttonUpload.setOnClickListener {
             if (viewModel.selectedImageBitmap.value == null) {
-                requireContext().toast(requireContext().getString(com.anafthdev.story.R.string.please_select_an_image_first))
+                requireContext().toast(requireContext().getString(R.string.please_select_an_image_first))
                 return@setOnClickListener
             }
 
             if (tfDescription.text.toString().isBlank()) {
-                requireContext().toast(requireContext().getString(com.anafthdev.story.R.string.please_enter_a_description))
+                requireContext().toast(requireContext().getString(R.string.please_enter_a_description))
                 return@setOnClickListener
             }
 

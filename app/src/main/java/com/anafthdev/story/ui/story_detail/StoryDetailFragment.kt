@@ -2,17 +2,17 @@ package com.anafthdev.story.ui.story_detail
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.transition.TransitionInflater
+import com.anafthdev.story.R
 import com.anafthdev.story.data.model.Story
 import com.anafthdev.story.databinding.FragmentStoryDetailBinding
+import com.anafthdev.story.foundation.extension.viewBinding
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,33 +20,24 @@ import java.text.DateFormat
 import java.time.Instant
 
 @AndroidEntryPoint
-class StoryDetailFragment : Fragment() {
+class StoryDetailFragment : Fragment(R.layout.fragment_story_detail) {
 
-    private lateinit var binding: FragmentStoryDetailBinding
 
     private val args: StoryDetailFragmentArgs by navArgs()
     private val viewModel: StoryDetailViewModel by viewModels()
+    private val binding: FragmentStoryDetailBinding by viewBinding(FragmentStoryDetailBinding::bind)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         if (args.story.isNotBlank()) {
             viewModel.setStory(Gson().fromJson(args.story, Story::class.java))
         }
-
-
-        binding = FragmentStoryDetailBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         initView()
 

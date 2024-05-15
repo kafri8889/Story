@@ -1,25 +1,16 @@
 package com.anafthdev.story.ui.onboarding
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.anafthdev.story.R
 import com.anafthdev.story.databinding.FragmentOnboardingBinding
+import com.anafthdev.story.foundation.extension.viewBinding
 
-class OnboardingFragment : Fragment() {
+class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
 
-    private lateinit var binding: FragmentOnboardingBinding
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentOnboardingBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    private val binding: FragmentOnboardingBinding by viewBinding(FragmentOnboardingBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

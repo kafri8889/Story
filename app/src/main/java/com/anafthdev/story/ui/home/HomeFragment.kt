@@ -1,9 +1,7 @@
 package com.anafthdev.story.ui.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -11,24 +9,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.anafthdev.story.R
 import com.anafthdev.story.databinding.FragmentHomeBinding
 import com.anafthdev.story.foundation.adapter.StoryRecyclerViewAdapter
+import com.anafthdev.story.foundation.extension.viewBinding
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment: Fragment() {
+class HomeFragment: Fragment(R.layout.fragment_home) {
 
-    private lateinit var binding: FragmentHomeBinding
     private lateinit var storyAdapter: StoryRecyclerViewAdapter
 
     private val viewModel: HomeViewModel by viewModels()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    private val binding: FragmentHomeBinding by viewBinding(FragmentHomeBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

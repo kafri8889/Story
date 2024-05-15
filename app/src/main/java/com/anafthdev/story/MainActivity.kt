@@ -14,17 +14,18 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.anafthdev.story.data.model.UserCredential
 import com.anafthdev.story.databinding.ActivityMainBinding
+import com.anafthdev.story.foundation.extension.viewBinding
 import com.anafthdev.story.foundation.localized.LocalizedActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity: LocalizedActivity() {
 
-    private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var splashScreen: SplashScreen
 
     private val viewModel: MainViewModel by viewModels()
+    private val binding: ActivityMainBinding by viewBinding(ActivityMainBinding::inflate)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,8 +44,6 @@ class MainActivity: LocalizedActivity() {
                 getColor(R.color.md_theme_background)
             )
         )
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 

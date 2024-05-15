@@ -9,9 +9,7 @@ import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.text.method.PasswordTransformationMethod
 import android.text.style.ClickableSpan
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.Window
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -30,6 +28,7 @@ import com.anafthdev.story.databinding.LoadingDialogBinding
 import com.anafthdev.story.foundation.common.EmailValidator
 import com.anafthdev.story.foundation.common.PasswordValidator
 import com.anafthdev.story.foundation.extension.toast
+import com.anafthdev.story.foundation.extension.viewBinding
 import com.anafthdev.story.foundation.worker.WorkerUtil
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,14 +40,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(R.layout.fragment_login) {
 
     @Inject lateinit var workManager: WorkManager
 
-    private lateinit var binding: FragmentLoginBinding
     private lateinit var progressDialog: Dialog
 
     private val viewModel: LoginViewModel by viewModels()
+    private val binding: FragmentLoginBinding by viewBinding(FragmentLoginBinding::bind)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -61,20 +60,11 @@ class LoginFragment : Fragment() {
             setCanceledOnTouchOutside(false)
             setContentView(
                 LoadingDialogBinding.inflate(layoutInflater).apply {
-                    tvTitle.text = context.getString(com.anafthdev.story.R.string.verifying_your_credentials)
-                    tvText.text = context.getString(com.anafthdev.story.R.string.please_wait)
+                    tvTitle.text = context.getString(R.string.verifying_your_credentials)
+                    tvText.text = context.getString(R.string.please_wait)
                 }.root
             )
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentLoginBinding.inflate(inflater, container, false)
-
-        return binding.root
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
