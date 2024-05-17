@@ -18,7 +18,7 @@ class EmailValidator: Validator<String> {
         // +: matches 1 or more of the preceding token.
         // @: matches "@" character
 
-        return if (Regex("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$").matches(input)) Validator.ValidatorResult.Success
+        return if (Regex("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}\$").matches(input)) Validator.ValidatorResult.Success
         else Validator.ValidatorResult.Failure(Validator.ValidatorResult.asStringResource(R.string.email_not_valid))
     }
 }

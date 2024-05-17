@@ -1,5 +1,3 @@
-import com.google.devtools.ksp.gradle.KspTaskJvm
-
 plugins {
     id("idea")
     id("com.android.application")
@@ -9,7 +7,6 @@ plugins {
     id("kotlin-kapt")
     id("kotlin-parcelize")
     id("com.squareup.wire")
-    id("com.google.devtools.ksp")
     id("org.jetbrains.kotlin.plugin.serialization")
     id("androidx.navigation.safeargs.kotlin")
 }
@@ -81,24 +78,6 @@ android {
     }
 }
 
-// Add this to fix ksp debug error when using wire and ksp
-androidComponents {
-    onVariants { variant ->
-        // https://github.com/square/wire/issues/2335
-        val buildType = variant.buildType.toString()
-        val flavor = variant.flavorName.toString()
-        tasks.withType<KspTaskJvm> {
-            if (name.contains(buildType, ignoreCase = true) && name.contains(
-                    flavor,
-                    ignoreCase = true
-                )
-            ) {
-                dependsOn("generate${flavor.capitalize()}${buildType.capitalize()}Protos")
-            }
-        }
-    }
-}
-
 wire {
     kotlin {
         android = true
@@ -109,6 +88,7 @@ dependencies {
 
     val lifecycle = "2.7.0"
     val datastore = "1.1.1"
+    val espresso = "3.5.1"
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 
@@ -142,7 +122,7 @@ dependencies {
     // Room
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
-    ksp("androidx.room:room-compiler:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
 
     // Work Manager
     implementation("androidx.hilt:hilt-work:1.2.0")
@@ -150,9 +130,9 @@ dependencies {
 
     // Dependency Injection
     implementation("com.google.dagger:hilt-android:2.48")
-    ksp("androidx.hilt:hilt-compiler:1.2.0")
-    ksp("com.google.dagger:hilt-compiler:2.48")
-    ksp("com.google.dagger:hilt-android-compiler:2.48")
+    kapt("androidx.hilt:hilt-compiler:1.2.0")
+    kapt("com.google.dagger:hilt-compiler:2.48")
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
 
     // Networking
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -162,10 +142,37 @@ dependencies {
     // Other
     implementation("com.google.code.gson:gson:2.10")
     implementation("com.jakewharton.timber:timber:5.0.1")
-    implementation("com.squareup.wire:wire-runtime:4.4.3")
+    implementation("com.squareup.wire:wire-runtime:4.9.2")
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
-//    testImplementation(libs.junit)
-//    androidTestImplementation(libs.androidx.junit)
-//    androidTestImplementation(libs.androidx.espresso.core)
+    implementation("androidx.test.espresso:espresso-contrib:$espresso")
+    implementation("androidx.test.espresso:espresso-idling-resource:$espresso")
+    implementation("com.google.guava:guava:31.0.1-android")
+    debugImplementation("androidx.fragment:fragment-testing:1.7.0")
+    testImplementation("com.google.truth:truth:1.1.5")
+    testImplementation("org.mockito:mockito-core:4.4.0")
+    testImplementation("org.mockito:mockito-inline:4.4.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1-Beta")
+    testImplementation("org.robolectric:robolectric:4.11.1")
+    testImplementation("androidx.test:core:1.5.0")
+    testImplementation("com.jraska.livedata:testing-ktx:1.3.0")
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    androidTestUtil("androidx.test:orchestrator:1.4.2")
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1-Beta")
+    androidTestImplementation("androidx.arch.core:core-testing:2.2.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test:core:1.5.0")
+    androidTestImplementation("androidx.test:runner:1.5.2")
+    androidTestImplementation("androidx.test:rules:1.5.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:$espresso")
+    androidTestImplementation("androidx.test.espresso:espresso-intents:$espresso")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.44.2")
+    androidTestImplementation("androidx.work:work-testing:2.9.0")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.44.2")
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
