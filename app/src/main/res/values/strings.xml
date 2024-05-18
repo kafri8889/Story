@@ -47,4 +47,15 @@
     <string name="appwidget_text">Stories</string>
     <string name="empty_text">No story</string>
     <string name="refresh">Refresh</string>
+    <string name="retry">Retry</string>
+    <string name="add_location">Add location</string>
+    <string name="change_location">Change location</string>
+    <string name="latitude">Latitude: %1$s</string>
+    <string name="longitude">Longitude: %1$s</string>
+    <string name="unknown">Unknown</string>
+    <string name="permission_rationale_location_title">Allow Story to get a location</string>
+    <string name="permission_rationale_location_message">This app requires location access permission to get the image location or when you select a location. Allow location access via settings.</string>
+    <string name="cancel">Cance</string>
+    <string name="please_pick_a_location">Please pick a location</string>
+    <string name="open_setting">Open setting</string>
 </resources>

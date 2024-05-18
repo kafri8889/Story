@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.work.WorkManager
+import com.anafthdev.story.data.model.LatLng
 import com.anafthdev.story.foundation.worker.Workers
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.UUID
@@ -26,6 +27,12 @@ class NewStoryViewModel @Inject constructor(
     val selectedImageBitmap: MutableLiveData<Bitmap?> = _selectedImageBitmap
 
     /**
+     * Lokasi dari gambar yang dipilih, jika gambar tidak memiliki lokasi maka lokasi user saat ini yang akan ditampilkan
+     */
+    private val _latLng = MutableLiveData<LatLng?>(null)
+    val latLng: MutableLiveData<LatLng?> = _latLng
+
+    /**
      * Status loading saat mengupload story
      */
     private val _isLoading = MutableLiveData(false)
@@ -33,6 +40,10 @@ class NewStoryViewModel @Inject constructor(
 
     fun setSelectedImageBitmap(bitmap: Bitmap) {
         _selectedImageBitmap.value = bitmap
+    }
+
+    fun setLatLng(latLng: LatLng) {
+        _latLng.value = latLng
     }
 
     fun setLoading(isLoading: Boolean) {

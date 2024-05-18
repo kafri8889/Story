@@ -46,4 +46,15 @@
     <string name="appwidget_text">Cerita</string>
     <string name="empty_text">Tidak ada cerita</string>
     <string name="refresh">Muat ulang</string>
+    <string name="retry">Coba lagi</string>
+    <string name="add_location">Tambahkan lokasi</string>
+    <string name="change_location">Ganti lokasi</string>
+    <string name="latitude">Garis lintang: %1$s</string>
+    <string name="longitude">Garis bujur: %1$s</string>
+    <string name="unknown">Tidak diketahui</string>
+    <string name="permission_rationale_location_title">Izinkan Story untuk mendapatkan lokasi</string>
+    <string name="permission_rationale_location_message">Aplikasi ini membutuhkan izin akses lokasi untuk mendapatkan lokasi gambar atau saat anda memilih lokasi. Izinkan akses lokasi lewat pengaturan.</string>
+    <string name="cancel">Batalkan</string>
+    <string name="please_pick_a_location">Silahkan pilih lokasi terlebih dahulu</string>
+    <string name="open_setting">Buka pengaturan</string>
 </resources>

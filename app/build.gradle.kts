@@ -86,7 +86,7 @@ wire {
 
 dependencies {
 
-    val lifecycle = "2.7.0"
+    val lifecycle = "2.8.0"
     val datastore = "1.1.1"
     val espresso = "3.5.1"
 
@@ -97,7 +97,7 @@ dependencies {
     implementation("androidx.preference:preference-ktx:1.2.1")
     implementation("androidx.activity:activity-ktx:1.9.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.fragment:fragment-ktx:1.7.0")
+    implementation("androidx.fragment:fragment-ktx:1.7.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
@@ -116,7 +116,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle")
     implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
 
     // Room
@@ -139,6 +139,12 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
 
+    // Paging
+    implementation("androidx.paging:paging-runtime-ktx:3.3.0")
+
+    // GMS
+    implementation("com.google.android.gms:play-services-location:21.2.0")
+
     // Other
     implementation("com.google.code.gson:gson:2.10")
     implementation("com.jakewharton.timber:timber:5.0.1")
@@ -148,7 +154,7 @@ dependencies {
     implementation("androidx.test.espresso:espresso-contrib:$espresso")
     implementation("androidx.test.espresso:espresso-idling-resource:$espresso")
     implementation("com.google.guava:guava:31.0.1-android")
-    debugImplementation("androidx.fragment:fragment-testing:1.7.0")
+    debugImplementation("androidx.fragment:fragment-testing:1.7.1")
     testImplementation("com.google.truth:truth:1.1.5")
     testImplementation("org.mockito:mockito-core:4.4.0")
     testImplementation("org.mockito:mockito-inline:4.4.0")
