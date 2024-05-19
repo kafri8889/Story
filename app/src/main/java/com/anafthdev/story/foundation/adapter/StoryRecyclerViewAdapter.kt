@@ -5,8 +5,8 @@ import android.graphics.drawable.ColorDrawable
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.anafthdev.story.data.model.Story
 import com.anafthdev.story.databinding.StoryItemBinding
@@ -16,7 +16,7 @@ import com.bumptech.glide.Glide
 import java.text.DateFormat
 import java.time.Instant
 
-class StoryRecyclerViewAdapter: ListAdapter<Story, StoryRecyclerViewAdapter.StoryViewHolder>(STORY_COMPARATOR) {
+class StoryRecyclerViewAdapter: PagingDataAdapter<Story, StoryRecyclerViewAdapter.StoryViewHolder>(STORY_COMPARATOR) {
 
     private var onItemClickListener: OnItemClickListener<Story>? = null
 
@@ -26,7 +26,9 @@ class StoryRecyclerViewAdapter: ListAdapter<Story, StoryRecyclerViewAdapter.Stor
 
     override fun onBindViewHolder(holder: StoryViewHolder, position: Int) {
 
-        holder.bind(position, currentList[position])
+        getItem(position)?.let { story ->
+            holder.bind(position, story)
+        }
     }
 
     fun setOnItemClickListener(onItemClickListener: OnItemClickListener<Story>) {

@@ -89,6 +89,7 @@ dependencies {
     val lifecycle = "2.8.0"
     val datastore = "1.1.1"
     val espresso = "3.5.1"
+    val room = "2.6.1"
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 
@@ -120,9 +121,10 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
 
     // Room
-    implementation("androidx.room:room-runtime:2.6.1")
-    implementation("androidx.room:room-ktx:2.6.1")
-    kapt("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-runtime:$room")
+    implementation("androidx.room:room-ktx:$room")
+    implementation("androidx.room:room-paging:$room")
+    kapt("androidx.room:room-compiler:$room")
 
     // Work Manager
     implementation("androidx.hilt:hilt-work:1.2.0")

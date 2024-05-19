@@ -72,8 +72,4 @@ abstract class LocalizedActivity: AppCompatActivity() {
 		this.listener = mListener
 	}
 
-	fun removeOnLocaleChangedListener() {
-		this.listener = null
-	}
-
 }

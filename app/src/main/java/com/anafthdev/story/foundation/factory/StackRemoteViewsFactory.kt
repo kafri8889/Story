@@ -34,7 +34,7 @@ class StackRemoteViewsFactory(
 
     override fun onCreate() {
         coroutineScope.launch(Dispatchers.Main) {
-            storyRepository.getAllStoriesFromDb().map { it.sortedByDescending { it.createdAt } }.collectLatest { storyList ->
+            storyRepository.getAllStoriesFromDb().map { storyList -> storyList.sortedByDescending { it.createdAt } }.collectLatest { storyList ->
                 withContext(Dispatchers.Main.immediate) {
                     mWidgetItems.clear()
                     val ids = appWidgetManager.getAppWidgetIds(

@@ -3,6 +3,7 @@ package com.anafthdev.story.data.repository.di
 import androidx.datastore.core.DataStore
 import com.anafthdev.story.ProtoUserCredential
 import com.anafthdev.story.ProtoUserPreference
+import com.anafthdev.story.data.datasource.local.AppDatabase
 import com.anafthdev.story.data.datasource.local.StoryDao
 import com.anafthdev.story.data.datasource.remote.StoryApiService
 import com.anafthdev.story.data.repository.StoryRepository
@@ -25,8 +26,9 @@ class RepositoryModule {
     @Singleton
     fun provideStoryApiRepository(
         storyApiService: StoryApiService,
+        appDatabase: AppDatabase,
         storyDao: StoryDao
-    ): StoryRepository = StoryRepositoryImpl(storyApiService, storyDao)
+    ): StoryRepository = StoryRepositoryImpl(storyApiService, appDatabase, storyDao)
 
     @Provides
     @Singleton

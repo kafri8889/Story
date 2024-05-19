@@ -58,4 +58,5 @@
     <string name="cancel">Cance</string>
     <string name="please_pick_a_location">Please pick a location</string>
     <string name="open_setting">Open setting</string>
+    <string name="there_is_no_story_for_now">There is no story for now</string>
 </resources>

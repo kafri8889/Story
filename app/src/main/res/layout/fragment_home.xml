@@ -26,6 +26,16 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextAppearance.Material3.TitleMedium"
+            android:id="@+id/tv_noStories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textAlignment="center"
+            android:visibility="gone"
+            android:text="@string/there_is_no_story_for_now"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_stories"
             android:layout_width="match_parent"

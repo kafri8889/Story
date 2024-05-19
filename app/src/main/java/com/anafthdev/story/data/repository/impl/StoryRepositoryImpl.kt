@@ -1,5 +1,13 @@
 package com.anafthdev.story.data.repository.impl
 
+import androidx.lifecycle.LiveData
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
+import com.anafthdev.story.data.datasource.StoryRemoteMediator
+import com.anafthdev.story.data.datasource.local.AppDatabase
 import com.anafthdev.story.data.datasource.local.StoryDao
 import com.anafthdev.story.data.datasource.remote.StoryApiService
 import com.anafthdev.story.data.model.Story
@@ -18,6 +26,7 @@ import javax.inject.Inject
 
 class StoryRepositoryImpl @Inject constructor(
     private val storyApiService: StoryApiService,
+    private val appDatabase: AppDatabase,
     private val storyDao: StoryDao
 ): StoryRepository {
 
@@ -37,12 +46,25 @@ class StoryRepositoryImpl @Inject constructor(
         return storyApiService.stories(optionalQuery)
     }
 
-    override fun getAllStoriesFromDb(): Flow<List<Story>> {
-        return storyDao.getAllStories()
+    @OptIn(ExperimentalPagingApi::class)
+    override fun getStories(): LiveData<PagingData<Story>> {
+        return Pager(
+            remoteMediator = StoryRemoteMediator(appDatabase, storyApiService),
+            config = PagingConfig(
+                pageSize = 5
+            ),
+            pagingSourceFactory = {
+                appDatabase.storyDao().getAllStories()
+            }
+        ).liveData
     }
 
     override fun getStoryFromDb(id: String): Flow<Story?> {
         return storyDao.getStoryById(id)
+    }
+
+    override fun getAllStoriesFromDb(): Flow<List<Story>> {
+        return storyDao.getAllStoriesAsFlow()
     }
 
     override suspend fun updateStoryInDb(vararg story: Story) {

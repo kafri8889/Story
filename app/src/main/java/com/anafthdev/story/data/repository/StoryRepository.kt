@@ -1,5 +1,7 @@
 package com.anafthdev.story.data.repository
 
+import androidx.lifecycle.LiveData
+import androidx.paging.PagingData
 import com.anafthdev.story.data.model.Story
 import com.anafthdev.story.data.model.body.LoginRequestBody
 import com.anafthdev.story.data.model.body.RegisterRequestBody
@@ -36,9 +38,11 @@ interface StoryRepository {
      */
     suspend fun stories(optionalQuery: Map<String, Int>): Response<StoriesResponse>
 
-    fun getAllStoriesFromDb(): Flow<List<Story>>
+    fun getStories(): LiveData<PagingData<Story>>
 
     fun getStoryFromDb(id: String): Flow<Story?>
+
+    fun getAllStoriesFromDb(): Flow<List<Story>>
 
     suspend fun updateStoryInDb(vararg story: Story)
 

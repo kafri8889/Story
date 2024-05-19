@@ -57,4 +57,5 @@
     <string name="cancel">Batalkan</string>
     <string name="please_pick_a_location">Silahkan pilih lokasi terlebih dahulu</string>
     <string name="open_setting">Buka pengaturan</string>
+    <string name="there_is_no_story_for_now">Tidak ada cerita untuk saat ini</string>
 </resources>

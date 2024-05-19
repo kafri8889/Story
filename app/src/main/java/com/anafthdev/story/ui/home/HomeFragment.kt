@@ -2,12 +2,15 @@ package com.anafthdev.story.ui.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anafthdev.story.R
 import com.anafthdev.story.databinding.FragmentHomeBinding
+import com.anafthdev.story.foundation.adapter.LoadingStateAdapter
 import com.anafthdev.story.foundation.adapter.StoryRecyclerViewAdapter
 import com.anafthdev.story.foundation.extension.viewBinding
 import com.google.gson.Gson
@@ -24,14 +27,12 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.refreshStories()
-
         viewModel.isRefreshing.observe(viewLifecycleOwner) { isRefreshing ->
             binding.swipeRefreshLayout.isRefreshing = isRefreshing
         }
 
         viewModel.stories.observe(viewLifecycleOwner) { stories ->
-            storyAdapter.submitList(stories)
+            storyAdapter.submitData(lifecycle, stories)
         }
 
         initView()
@@ -59,11 +60,18 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
                     )
                 )
             }
+
+            addLoadStateListener {
+                swipeRefreshLayout.isRefreshing = it.refresh == LoadState.Loading
+                tvNoStories.isVisible = it.refresh is LoadState.Loading && itemCount == 0
+            }
         }
 
         rvStories.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = storyAdapter
+            adapter = storyAdapter.withLoadStateFooter(
+                footer = LoadingStateAdapter { storyAdapter.retry() }
+            )
             postponeEnterTransition()
             viewTreeObserver.addOnPreDrawListener {
                 startPostponedEnterTransition()
@@ -87,7 +95,7 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         }
 
         swipeRefreshLayout.setOnRefreshListener {
-            viewModel.refreshStories()
+            storyAdapter.refresh()
         }
     }
 }

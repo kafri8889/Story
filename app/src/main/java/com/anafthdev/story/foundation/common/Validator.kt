@@ -15,7 +15,7 @@ fun interface Validator<T> {
         val isFailure: Boolean
             get() = this is Failure
 
-        val errMsg: String
+        private val errMsg: String
             get() = if (this is Failure) msg else ""
 
         data object Success: ValidatorResult()
