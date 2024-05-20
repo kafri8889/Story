@@ -26,6 +26,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
@@ -167,6 +171,7 @@ dependencies {
     testImplementation("com.jraska.livedata:testing-ktx:1.3.0")
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
     androidTestUtil("androidx.test:orchestrator:1.4.2")
     androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1-Beta")
     androidTestImplementation("androidx.arch.core:core-testing:2.2.0")

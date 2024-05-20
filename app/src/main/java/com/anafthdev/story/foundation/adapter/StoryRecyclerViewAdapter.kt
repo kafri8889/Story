@@ -70,7 +70,7 @@ class StoryRecyclerViewAdapter: PagingDataAdapter<Story, StoryRecyclerViewAdapte
     }
 
     companion object {
-        private val STORY_COMPARATOR = object : DiffUtil.ItemCallback<Story>() {
+        val STORY_COMPARATOR = object : DiffUtil.ItemCallback<Story>() {
             override fun areItemsTheSame(oldItem: Story, newItem: Story): Boolean =
                 oldItem.id == newItem.id
 

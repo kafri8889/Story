@@ -5,6 +5,7 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import androidx.paging.liveData
 import com.anafthdev.story.data.datasource.StoryRemoteMediator
 import com.anafthdev.story.data.datasource.local.AppDatabase
@@ -18,6 +19,9 @@ import com.anafthdev.story.data.model.response.PostStoryResponse
 import com.anafthdev.story.data.model.response.RegisterResponse
 import com.anafthdev.story.data.model.response.StoriesResponse
 import com.anafthdev.story.data.repository.StoryRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -47,7 +51,9 @@ class StoryRepositoryImpl @Inject constructor(
     }
 
     @OptIn(ExperimentalPagingApi::class)
-    override fun getStories(): LiveData<PagingData<Story>> {
+    override fun getStories(
+
+    ): LiveData<PagingData<Story>> {
         return Pager(
             remoteMediator = StoryRemoteMediator(appDatabase, storyApiService),
             config = PagingConfig(
@@ -56,7 +62,7 @@ class StoryRepositoryImpl @Inject constructor(
             pagingSourceFactory = {
                 appDatabase.storyDao().getAllStories()
             }
-        ).liveData
+        ).liveData.cachedIn(CoroutineScope(SupervisorJob() + Dispatchers.Main))
     }
 
     override fun getStoryFromDb(id: String): Flow<Story?> {
