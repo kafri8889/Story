@@ -9,6 +9,7 @@ import androidx.work.workDataOf
 import com.anafthdev.story.data.model.LoginResult
 import com.anafthdev.story.data.model.body.LoginRequestBody
 import com.anafthdev.story.data.model.body.RegisterRequestBody
+import com.google.android.gms.maps.model.LatLng
 import com.google.gson.Gson
 
 object Workers {
@@ -51,7 +52,7 @@ object Workers {
             .build()
     }
 
-    fun postStory(imageUri: Uri, description: String): OneTimeWorkRequest {
+    fun postStory(imageUri: Uri, description: String, latlng: LatLng? = null): OneTimeWorkRequest {
         return OneTimeWorkRequestBuilder<PostStoryWorker>()
             .setConstraints(
                 Constraints(
@@ -61,6 +62,7 @@ object Workers {
             .setInputData(
                 workDataOf(
                     PostStoryWorker.EXTRA_IMAGE_URI to imageUri.toString(),
+                    PostStoryWorker.EXTRA_LOCATION to Gson().toJson(latlng),
                     PostStoryWorker.EXTRA_IMAGE_DESCRIPTION to description
                 )
             )

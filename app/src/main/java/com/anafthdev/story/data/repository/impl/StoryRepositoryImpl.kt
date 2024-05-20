@@ -42,8 +42,13 @@ class StoryRepositoryImpl @Inject constructor(
         return storyApiService.login(body)
     }
 
-    override suspend fun postStory(file: MultipartBody.Part, description: RequestBody): Response<PostStoryResponse> {
-        return storyApiService.postStory(file, description)
+    override suspend fun postStory(
+        file: MultipartBody.Part,
+        description: RequestBody,
+        latitude: RequestBody,
+        longitude: RequestBody
+    ): Response<PostStoryResponse> {
+        return storyApiService.postStory(file, description, latitude, longitude)
     }
 
     override suspend fun stories(optionalQuery: Map<String, Int>): Response<StoriesResponse> {
@@ -57,7 +62,7 @@ class StoryRepositoryImpl @Inject constructor(
         return Pager(
             remoteMediator = StoryRemoteMediator(appDatabase, storyApiService),
             config = PagingConfig(
-                pageSize = 5
+                pageSize = 10
             ),
             pagingSourceFactory = {
                 appDatabase.storyDao().getAllStories()

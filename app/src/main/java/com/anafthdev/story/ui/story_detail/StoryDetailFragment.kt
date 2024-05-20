@@ -1,5 +1,6 @@
 package com.anafthdev.story.ui.story_detail
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.View
@@ -13,6 +14,7 @@ import com.anafthdev.story.R
 import com.anafthdev.story.data.model.Story
 import com.anafthdev.story.databinding.FragmentStoryDetailBinding
 import com.anafthdev.story.foundation.extension.viewBinding
+import com.anafthdev.story.ui.maps.MapsFragment
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,6 +54,7 @@ class StoryDetailFragment : Fragment(R.layout.fragment_story_detail) {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun updateView(story: Story?) = with(binding) {
         ViewCompat.setTransitionName(ivStory, "story_image_${story?.id}")
         ViewCompat.setTransitionName(tvName, "story_username_${story?.id}")
@@ -64,9 +67,19 @@ class StoryDetailFragment : Fragment(R.layout.fragment_story_detail) {
 
         tvName.text = story?.name
         tvDescription.text = story?.description
+        tvLatitudeLongitude.text = "${story?.lat ?: 0.0} : ${story?.lon ?: 0.0}"
         tvDate.text = DateFormat.getDateInstance(DateFormat.FULL).format(
             if (story != null) Instant.parse(story.createdAt).toEpochMilli()
             else 0
         )
+
+        fabViewLocation.setOnClickListener {
+            findNavController().navigate(
+                StoryDetailFragmentDirections.actionStoryDetailFragmentToMapsFragment(
+                    story = Gson().toJson(story),
+                    action = MapsFragment.ACTION_VIEW
+                )
+            )
+        }
     }
 }

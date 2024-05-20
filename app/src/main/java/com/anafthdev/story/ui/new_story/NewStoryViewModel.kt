@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.work.WorkManager
-import com.anafthdev.story.data.model.LatLng
 import com.anafthdev.story.foundation.worker.Workers
+import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.UUID
 import javax.inject.Inject
@@ -54,7 +54,7 @@ class NewStoryViewModel @Inject constructor(
         _isLoading.value = true
 
         workManager.enqueue(
-            Workers.postStory(uri, description).also {
+            Workers.postStory(uri, description, latLng.value).also {
                 _uploadWorkId.value = it.id
             }
         )

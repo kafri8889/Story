@@ -16,6 +16,7 @@ import com.anafthdev.story.data.model.UserCredential
 import com.anafthdev.story.databinding.ActivityMainBinding
 import com.anafthdev.story.foundation.extension.viewBinding
 import com.anafthdev.story.foundation.localized.LocalizedActivity
+import com.anafthdev.story.ui.onboarding.OnboardingFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -86,7 +87,7 @@ class MainActivity: LocalizedActivity() {
                     // Jika tidak, biarkan user ada di onboarding screen, supaya login ulang
                     if (value.isValid) {
                         if (navController.currentDestination?.id == R.id.onboarding_fragment) {
-                            navController.navigate(R.id.action_onboarding_fragment_to_homeFragment)
+                            navController.navigate(OnboardingFragmentDirections.actionOnboardingFragmentToHomeFragment())
                         }
                     }
 

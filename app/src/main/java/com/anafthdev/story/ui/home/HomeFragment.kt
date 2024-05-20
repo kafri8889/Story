@@ -50,6 +50,10 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
                             Gson().toJson(story)
                         )
                     )
+//                    try {
+//                    } catch (e: IllegalArgumentException) {
+//
+//                    }
 
                     return@setOnItemClickListener
                 }

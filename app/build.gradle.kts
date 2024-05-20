@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("idea")
     id("com.android.application")
@@ -9,6 +11,7 @@ plugins {
     id("com.squareup.wire")
     id("org.jetbrains.kotlin.plugin.serialization")
     id("androidx.navigation.safeargs.kotlin")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -24,6 +27,13 @@ android {
         multiDexEnabled = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val properties = Properties().apply {
+            load(rootProject.file("local.properties").reader())
+        }
+
+        val mapsApiKey = properties["MAPS_API_KEY"]
+        manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey.toString()
     }
 
     testOptions {
@@ -149,6 +159,7 @@ dependencies {
     implementation("androidx.paging:paging-runtime-ktx:3.3.0")
 
     // GMS
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation("com.google.android.gms:play-services-location:21.2.0")
 
     // Other

@@ -46,7 +46,8 @@ class StoryRemoteMediator(
             val response = storyApiService.stories(
                 mapOf(
                     "page" to page,
-                    "size" to state.config.pageSize
+                    "size" to state.config.pageSize,
+                    "location" to 0
                 )
             )
 
@@ -60,11 +61,12 @@ class StoryRemoteMediator(
             }
 
             val stories = response.body()!!.listStory.toTypedArray()
-            val endOfPaginationReached = stories.isEmpty()
+            val endOfPaginationReached = false
 
             appDatabase.withTransaction {
                 if (loadType == LoadType.REFRESH) {
                     appDatabase.storyDao().deleteAll()
+                    appDatabase.remoteKeysDao().deleteAll()
                 }
 
                 val prevKey = if (page == 1) null else page - 1

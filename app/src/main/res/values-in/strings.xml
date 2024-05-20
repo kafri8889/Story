@@ -58,4 +58,10 @@
     <string name="please_pick_a_location">Silahkan pilih lokasi terlebih dahulu</string>
     <string name="open_setting">Buka pengaturan</string>
     <string name="there_is_no_story_for_now">Tidak ada cerita untuk saat ini</string>
+    <string name="location">Lokasi</string>
+    <string name="view_location">Lihat lokasi</string>
+    <string name="image_location">Lokasi gambar</string>
+    <string name="save">Simpan</string>
+    <string name="my_location">Lokasi saya</string>
+    <string name="pick_a_location">Pilih lokasi</string>
 </resources>

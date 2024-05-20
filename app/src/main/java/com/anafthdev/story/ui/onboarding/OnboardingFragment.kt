@@ -16,11 +16,11 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonRegister.setOnClickListener {
-            findNavController().navigate(R.id.action_onboarding_fragment_to_register_fragment)
+            findNavController().navigate(OnboardingFragmentDirections.actionOnboardingFragmentToRegisterFragment())
         }
 
         binding.buttonLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_onboarding_fragment_to_loginFragment)
+            findNavController().navigate(OnboardingFragmentDirections.actionOnboardingFragmentToLoginFragment())
         }
     }
 }

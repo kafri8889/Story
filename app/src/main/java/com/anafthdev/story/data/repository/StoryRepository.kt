@@ -29,7 +29,12 @@ interface StoryRepository {
     /**
      * Post story to server
      */
-    suspend fun postStory(file: MultipartBody.Part, description: RequestBody): Response<PostStoryResponse>
+    suspend fun postStory(
+        file: MultipartBody.Part,
+        description: RequestBody,
+        latitude: RequestBody,
+        longitude: RequestBody,
+    ): Response<PostStoryResponse>
 
     /**
      * Get all stories

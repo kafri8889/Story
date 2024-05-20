@@ -12,13 +12,7 @@ class HomeViewModel @Inject constructor(
     storyRepository: StoryRepository,
 ): ViewModel() {
 
-    // Tambahkan "cachedIn" supaya tidak crash saat berpindah screen
     val stories = storyRepository.getStories()
-
-    /**
-     * For testing purpose
-     */
-    val storiesWithoutCached = storyRepository.getStories()
 
     private val _isRefreshing = MutableLiveData(false)
     val isRefreshing: LiveData<Boolean> = _isRefreshing

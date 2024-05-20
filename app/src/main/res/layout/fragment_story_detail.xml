@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:isScrollContainer="true"
+    android:fillViewport="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.new_story.NewStoryFragment">
 
@@ -49,16 +50,41 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <LinearLayout
+            android:id="@+id/ll_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            app:layout_constraintStart_toStartOf="@+id/materialCardView"
+            app:layout_constraintEnd_toEndOf="@+id/materialCardView"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/location"
+                android:src="@drawable/ic_location_on"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_latitudeLongitude"
+                style="@style/TextAppearance.Material3.LabelMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="-134.32343 : 98.89783" />
+
+        </LinearLayout>
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_date"
-            style="@style/TextAppearance.Material3.LabelSmall"
+            style="@style/TextAppearance.Material3.LabelMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:transitionName="story_date"
             app:layout_constraintStart_toStartOf="@+id/materialCardView"
             app:layout_constraintEnd_toEndOf="@+id/materialCardView"
-            app:layout_constraintTop_toBottomOf="@+id/materialCardView"
+            app:layout_constraintTop_toBottomOf="@+id/ll_location"
             tools:text="Lorem Pisum" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -85,6 +111,17 @@
             app:layout_constraintEnd_toEndOf="@id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
             tools:text="Lorem Pisum Dolor Sit Amet"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            style="@style/Widget.Material3.FloatingActionButton.Tertiary"
+            android:id="@+id/fab_viewLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:contentDescription="@string/view_location"
+            android:src="@drawable/ic_location_searching"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline1"

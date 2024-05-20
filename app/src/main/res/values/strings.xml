@@ -1,6 +1,8 @@
 <resources>
 
     <string name="app_name" translatable="false">Story</string>
+    <string name="map_id" translatable="false">112cba377c7f74ec</string>
+
     <string name="story_welcome_text">Story, a social media platform designed to bring joy and excitement. Share happy moments, discover inspiring stories, and connect with a positive community. Let\'s create a happier digital world together!</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
@@ -59,4 +61,10 @@
     <string name="please_pick_a_location">Please pick a location</string>
     <string name="open_setting">Open setting</string>
     <string name="there_is_no_story_for_now">There is no story for now</string>
+    <string name="location">Location</string>
+    <string name="view_location">View location</string>
+    <string name="image_location">Image location</string>
+    <string name="save">Save</string>
+    <string name="my_location">My location</string>
+    <string name="pick_a_location">Pick a location</string>
 </resources>

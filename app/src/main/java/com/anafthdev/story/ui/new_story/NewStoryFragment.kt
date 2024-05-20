@@ -4,10 +4,8 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
 import android.view.View
 import android.view.Window
 import android.widget.Toast
@@ -22,7 +20,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.anafthdev.story.R
-import com.anafthdev.story.data.model.LatLng
 import com.anafthdev.story.databinding.FragmentNewStoryBinding
 import com.anafthdev.story.databinding.LoadingDialogBinding
 import com.anafthdev.story.foundation.extension.getRotatedBitmap
@@ -32,13 +29,14 @@ import com.anafthdev.story.foundation.extension.viewBinding
 import com.anafthdev.story.foundation.util.PermissionUtil
 import com.anafthdev.story.foundation.util.UriUtil
 import com.anafthdev.story.foundation.worker.WorkerUtil
+import com.anafthdev.story.ui.maps.MapsFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.TransformationUtils.rotateImage
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.CancellationTokenSource
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
@@ -63,6 +61,11 @@ class NewStoryFragment : Fragment(R.layout.fragment_new_story) {
      * Temp uri yang digunakan untuk menampung gambar yang diambil dari kamera yang akan ditampilkan ke selected image
      */
     private var tempUri: Uri = Uri.EMPTY
+
+    /**
+     * Berfungsi untuk mengetahui apakah popBackStack() sudah pernah dipanggil atau belum
+     */
+    private var hasPopped = false
 
     private val pickImageResultLauncher = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
@@ -89,28 +92,6 @@ class NewStoryFragment : Fragment(R.layout.fragment_new_story) {
                     viewModel.setLatLng(LatLng(it[0], it[1]))
                 }
             }
-        }
-    }
-
-    private val requestLocationPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestMultiplePermissions()
-    ) { result ->
-        if (!result.values.all { it }) {
-            MaterialAlertDialogBuilder(requireContext()).apply {
-                setCancelable(false)
-                setTitle(R.string.permission_rationale_location_title)
-                setMessage(R.string.permission_rationale_location_message)
-                setNegativeButton(requireContext().getString(R.string.cancel)) { dialog, _ ->
-                    dialog.dismiss()
-                }
-                setPositiveButton(requireContext().getString(R.string.open_setting)) { _, _ ->
-                    startActivity(
-                        Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-                            data = Uri.fromParts("package", requireContext().packageName, null)
-                        }
-                    )
-                }
-            }.show()
         }
     }
 
@@ -155,7 +136,11 @@ class NewStoryFragment : Fragment(R.layout.fragment_new_story) {
                     WorkInfo.State.SUCCEEDED -> {
                         viewModel.setLoading(false)
 
-                        findNavController().popBackStack()
+                        // Mencegah pemanggilan popBackStack() lebih dari satu kali
+                        if (!hasPopped) {
+                            findNavController().popBackStack()
+                            hasPopped = true
+                        }
                     }
                     WorkInfo.State.FAILED -> {
                         viewModel.setLoading(false)
@@ -175,6 +160,14 @@ class NewStoryFragment : Fragment(R.layout.fragment_new_story) {
                 }
             }
         }
+
+        findNavController()
+            .currentBackStackEntry
+            ?.savedStateHandle
+            ?.getLiveData<com.google.android.gms.maps.model.LatLng>(MapsFragment.ARG_LATLNG)
+            ?.observe(viewLifecycleOwner) { latlng ->
+                viewModel.setLatLng(LatLng(latlng.latitude, latlng.longitude))
+            }
 
         viewModel.selectedImageBitmap.observe(viewLifecycleOwner) { bitmap ->
             if (bitmap != null) {
@@ -252,24 +245,11 @@ class NewStoryFragment : Fragment(R.layout.fragment_new_story) {
         }
 
         buttonChangeLocation.setOnClickListener {
-            if (
-                !PermissionUtil.checkPermissionGranted(
-                    requireContext(),
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
+            findNavController().navigate(
+                NewStoryFragmentDirections.actionNewStoryFragmentToMapsFragment(
+                    action = MapsFragment.ACTION_PICK
                 )
-            ) {
-                requestLocationPermissionLauncher.launch(
-                    arrayOf(
-                        Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.ACCESS_COARSE_LOCATION
-                    )
-                )
-
-                return@setOnClickListener
-            }
-
-            // TODO: Navigate ke map screen
+            )
         }
 
         buttonUpload.setOnClickListener {
