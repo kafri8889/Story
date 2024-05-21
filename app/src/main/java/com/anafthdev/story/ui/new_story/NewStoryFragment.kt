@@ -29,6 +29,7 @@ import com.anafthdev.story.foundation.extension.viewBinding
 import com.anafthdev.story.foundation.util.PermissionUtil
 import com.anafthdev.story.foundation.util.UriUtil
 import com.anafthdev.story.foundation.worker.WorkerUtil
+import com.anafthdev.story.ui.home.HomeFragment
 import com.anafthdev.story.ui.maps.MapsFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.TransformationUtils.rotateImage
@@ -138,7 +139,13 @@ class NewStoryFragment : Fragment(R.layout.fragment_new_story) {
 
                         // Mencegah pemanggilan popBackStack() lebih dari satu kali
                         if (!hasPopped) {
-                            findNavController().popBackStack()
+                            findNavController().run {
+                                previousBackStackEntry
+                                    ?.savedStateHandle
+                                    ?.set(HomeFragment.ACTION_REFRESH, true)
+
+                                popBackStack()
+                            }
                             hasPopped = true
                         }
                     }

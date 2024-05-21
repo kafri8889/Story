@@ -35,6 +35,19 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         initView()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        findNavController()
+            .currentBackStackEntry
+            ?.savedStateHandle?.let { savedStateHandle ->
+                savedStateHandle.get<Boolean>(ACTION_REFRESH)?.let { refresh ->
+                    if (refresh) storyAdapter.refresh()
+                    savedStateHandle.remove<Boolean>(ACTION_REFRESH)
+                }
+            }
+    }
+
     private fun initView() = with(binding) {
         storyAdapter = StoryRecyclerViewAdapter().apply {
             setOnItemClickListener { pos, story, extras ->
@@ -61,6 +74,8 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
             addLoadStateListener {
                 swipeRefreshLayout.isRefreshing = it.refresh == LoadState.Loading
                 tvNoStories.isVisible = it.refresh is LoadState.Loading && itemCount == 0
+
+                if (it.refresh is LoadState.NotLoading) rvStories.scrollToPosition(0)
             }
         }
 
@@ -107,5 +122,9 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         swipeRefreshLayout.setOnRefreshListener {
             storyAdapter.refresh()
         }
+    }
+
+    companion object {
+        const val ACTION_REFRESH = "com.anafthdev.story.ui.home.ACTION_REFRESH"
     }
 }
