@@ -36,8 +36,10 @@ android {
         manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey.toString()
     }
 
+    @Suppress("UnstableApiUsage")
     testOptions {
         unitTests.isReturnDefaultValues = true
+        animationsDisabled = true
     }
 
     buildTypes {
@@ -100,6 +102,7 @@ wire {
 
 dependencies {
 
+    val navigation = "2.7.7"
     val lifecycle = "2.8.0"
     val datastore = "1.1.1"
     val espresso = "3.5.1"
@@ -114,8 +117,8 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.fragment:fragment-ktx:1.7.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-fragment-ktx:$navigation")
+    implementation("androidx.navigation:navigation-ui-ktx:$navigation")
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
 
@@ -138,6 +141,7 @@ dependencies {
     implementation("androidx.room:room-runtime:$room")
     implementation("androidx.room:room-ktx:$room")
     implementation("androidx.room:room-paging:$room")
+    //noinspection KaptUsageInsteadOfKsp
     kapt("androidx.room:room-compiler:$room")
 
     // Work Manager
@@ -168,9 +172,8 @@ dependencies {
     implementation("com.squareup.wire:wire-runtime:4.9.2")
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
-    implementation("androidx.test.espresso:espresso-contrib:$espresso")
-    implementation("androidx.test.espresso:espresso-idling-resource:$espresso")
     implementation("com.google.guava:guava:31.0.1-android")
+    implementation("androidx.test.espresso:espresso-idling-resource:$espresso")
     debugImplementation("androidx.fragment:fragment-testing:1.7.1")
     testImplementation("com.google.truth:truth:1.1.5")
     testImplementation("org.mockito:mockito-core:4.4.0")
@@ -184,7 +187,10 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     testImplementation("androidx.arch.core:core-testing:2.2.0")
     androidTestUtil("androidx.test:orchestrator:1.4.2")
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:$espresso")
     androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1-Beta")
+    androidTestImplementation("com.squareup.okhttp3:mockwebserver:4.9.3")
+    androidTestImplementation("com.squareup.okhttp3:okhttp-tls:4.9.3")
     androidTestImplementation("androidx.arch.core:core-testing:2.2.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test:core:1.5.0")
@@ -194,6 +200,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-intents:$espresso")
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.44.2")
     androidTestImplementation("androidx.work:work-testing:2.9.0")
+    androidTestImplementation("androidx.navigation:navigation-testing:$navigation")
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.44.2")
 }
 

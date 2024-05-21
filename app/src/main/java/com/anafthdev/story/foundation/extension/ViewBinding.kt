@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.anafthdev.story.foundation.extension
 
 import android.view.LayoutInflater

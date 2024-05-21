@@ -1,0 +1,195 @@
+{
+  "error": false,
+  "message": "Stories fetched successfully",
+  "listStory": [
+    {
+      "id": "story-qxNm0iy9AEqJHjMo",
+      "name": "trdgam",
+      "description": "locloc",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1716292030772_8f09fb1615c019df99c4.tmp",
+      "createdAt": "2024-05-21T11:47:10.774Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-FcvWcQL1vByXL4uS",
+      "name": "udin",
+      "description": "ini dari real device ",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1716291991278_e95ac65d538c864a2c50.jpg",
+      "createdAt": "2024-05-21T11:46:31.281Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-Z8dUorS2WflhJRsN",
+      "name": "Arafie",
+      "description": "ddsds",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1716291926891_0810ee7b181e713f9015.jpg",
+      "createdAt": "2024-05-21T11:45:26.895Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-7SjlFrJGnjkKotGF",
+      "name": "razirizz",
+      "description": "\"ngopi lur\"",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1716291906176_0ae87874eb080014f641.jpg",
+      "createdAt": "2024-05-21T11:45:06.177Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-P9oZAcuTSxl5ceDN",
+      "name": "udin",
+      "description": "ini dari kamera",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1716291584587_dae2eaf9b9f2046d2c9c.jpg",
+      "createdAt": "2024-05-21T11:39:44.588Z",
+      "lat": 37.4220936,
+      "lon": -122.083922
+    },
+    {
+      "id": "story-KnCJQa4IWRMFPM0P",
+      "name": "naufalfikri",
+      "description": "tsesdfsddsfsfdfsfsd",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1716291348793_1dcf84eb5f0b67f512cf.jpg",
+      "createdAt": "2024-05-21T11:35:48.794Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-BVciixJoSGMFb1tK",
+      "name": "trdgam",
+      "description": "tes",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1716291215111_8065c6cf868140d41984.tmp",
+      "createdAt": "2024-05-21T11:33:35.112Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-JYbsIpa_9U2pSwd2",
+      "name": "trdgam",
+      "description": "yyyy",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1716290829311_a70d288f214109c5a417.tmp",
+      "createdAt": "2024-05-21T11:27:09.312Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-hhg2OWkxj8P67QrY",
+      "name": "test",
+      "description": "trtrtrtr",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1716290811564_544ea0ffdba25326ed33.jpg",
+      "createdAt": "2024-05-21T11:26:51.565Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-QgdZkLfTPvpKjAOW",
+      "name": "test",
+      "description": "ggggg",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1716290789621_09aa654e32f080a7bb99.jpg",
+      "createdAt": "2024-05-21T11:26:29.623Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-AISB7qumapa2B-6Y",
+      "name": "razirizz",
+      "description": "\"tes\"",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1716290663559_2169ca863160bd1ff87e.jpg",
+      "createdAt": "2024-05-21T11:24:23.562Z",
+      "lat": -6.169753,
+      "lon": 106.87049
+    },
+    {
+      "id": "story-x7LqOjZI1vqyy0DA",
+      "name": "Arafie",
+      "description": "dsdsds",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1716290632411_5f3b79e680e7dcf335f9.jpg",
+      "createdAt": "2024-05-21T11:23:52.413Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-hxPi9UINVeKddte2",
+      "name": "alex6",
+      "description": "test",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1716290592170_1c3a2a244955026e4edc.jpg",
+      "createdAt": "2024-05-21T11:23:12.179Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-0be5v8xGep17pMJQ",
+      "name": "student89",
+      "description": "Tes",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1716290438643_fd5cf9400dad8297e64f.jpg",
+      "createdAt": "2024-05-21T11:20:38.644Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-9Sf99DQ_ax0-Fb1b",
+      "name": "trdgam",
+      "description": "tes",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1716290371777_f86abf3bff9a8bfba40a.tmp",
+      "createdAt": "2024-05-21T11:19:31.780Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-kFIbOoVQBnF4S8Bs",
+      "name": "reviewer",
+      "description": "cam",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1716290353896_1c5e228cf574812cb0c6.jpg",
+      "createdAt": "2024-05-21T11:19:13.901Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-YG4Ww3EgTG6_kx6Z",
+      "name": "kop",
+      "description": "test",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1716290347286_2be552a2030f04ca9194.jpg",
+      "createdAt": "2024-05-21T11:19:07.422Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-TqtyOv_1a7f6xI-J",
+      "name": "kop",
+      "description": "test",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1716290341253_55a579dd4bbd7845bd6c.jpg",
+      "createdAt": "2024-05-21T11:19:01.259Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-teLalVCGbgogHgzw",
+      "name": "reviewer",
+      "description": "upload",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1716290322328_e00234b92306b9de17f0.jpg",
+      "createdAt": "2024-05-21T11:18:42.329Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-ELv_ewXquKqfuO4s",
+      "name": "alex6",
+      "description": "test",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1716290310148_eab70f633d3227d3700b.jpg",
+      "createdAt": "2024-05-21T11:18:30.151Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-ELv_ewXquKqfuO4s",
+      "name": "Ju Jingyi",
+      "description": "test",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1716290310148_eab70f633d3227d3700b.jpg",
+      "createdAt": "2024-05-21T11:18:30.151Z",
+      "lat": null,
+      "lon": null
+    }
+  ]
+}

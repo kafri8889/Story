@@ -9,6 +9,12 @@ import java.util.concurrent.TimeUnit
 
 object ApiClient {
 
+    /**
+     * Jika ingin melakukan test dengan mock web server, assign nilai ke variabel ini
+     * Jika variabel ini null, maka akan menggunakan base url dari build config
+     */
+    var API_BASE_URL_TEST: String? = null
+
     private val loggingInterceptor: HttpLoggingInterceptor by lazy {
         HttpLoggingInterceptor().apply {
             setLevel(if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE)

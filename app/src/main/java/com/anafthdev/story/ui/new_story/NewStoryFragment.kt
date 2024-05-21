@@ -164,7 +164,7 @@ class NewStoryFragment : Fragment(R.layout.fragment_new_story) {
         findNavController()
             .currentBackStackEntry
             ?.savedStateHandle
-            ?.getLiveData<com.google.android.gms.maps.model.LatLng>(MapsFragment.ARG_LATLNG)
+            ?.getLiveData<LatLng>(MapsFragment.ARG_LATLNG)
             ?.observe(viewLifecycleOwner) { latlng ->
                 viewModel.setLatLng(LatLng(latlng.latitude, latlng.longitude))
             }

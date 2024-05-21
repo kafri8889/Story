@@ -22,7 +22,7 @@ class RemoteModule {
         sessionManager: SessionManager
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BuildConfig.STORY_BASE_URL)
+            .baseUrl(ApiClient.API_BASE_URL_TEST ?: BuildConfig.STORY_BASE_URL)
             .client(ApiClient.getClient(sessionManager))
             .addConverterFactory(GsonConverterFactory.create())
             .build()

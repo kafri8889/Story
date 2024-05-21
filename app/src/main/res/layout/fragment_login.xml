@@ -6,7 +6,8 @@
     android:fillViewport="true"
     android:background="@color/md_theme_background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.register.RegisterFragment">
+    tools:context=".ui.register.RegisterFragment"
+    tools:ignore="Overdraw">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

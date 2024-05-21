@@ -26,7 +26,7 @@ object DistanceUtil {
      *
      * @see <a href="http://www.movable-type.co.uk/scripts/latlong.html">Sumber</a>
      */
-    fun haversine(latitude1: Double, longitude1: Double, latitude2: Double, longitude2: Double): Double {
+    private fun haversine(latitude1: Double, longitude1: Double, latitude2: Double, longitude2: Double): Double {
         var lat1 = latitude1
         var lat2 = latitude2
         val deltaLat = Math.toRadians(lat2 - lat1)

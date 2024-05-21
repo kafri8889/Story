@@ -66,4 +66,6 @@
     <string name="pick_a_location">Pilih lokasi</string>
     <string name="story_not_found">Cerita tidak ditemukan</string>
     <string name="show_all_story_in_maps">Tampilkan semua cerita di maps</string>
+    <string name="preparing_map">Menyiapkan peta</string>
+    <string name="welcome">Selamat datang</string>
 </resources>

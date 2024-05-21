@@ -1,5 +1,6 @@
 package com.anafthdev.story.foundation.localized
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
@@ -30,6 +31,7 @@ object LocalizationUtil {
 		LocaleList.setDefault(LocaleList(locale))
 	}
 
+	@SuppressLint("AppBundleLocaleChanges")
 	private fun getOverridingConfig(locale: Locale, resources: Resources): Configuration {
 		val configuration = resources.configuration
 
