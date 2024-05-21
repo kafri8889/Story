@@ -64,4 +64,6 @@
     <string name="save">Simpan</string>
     <string name="my_location">Lokasi saya</string>
     <string name="pick_a_location">Pilih lokasi</string>
+    <string name="story_not_found">Cerita tidak ditemukan</string>
+    <string name="show_all_story_in_maps">Tampilkan semua cerita di maps</string>
 </resources>

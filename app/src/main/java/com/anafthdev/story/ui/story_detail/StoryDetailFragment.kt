@@ -13,6 +13,7 @@ import androidx.transition.TransitionInflater
 import com.anafthdev.story.R
 import com.anafthdev.story.data.model.Story
 import com.anafthdev.story.databinding.FragmentStoryDetailBinding
+import com.anafthdev.story.foundation.extension.toast
 import com.anafthdev.story.foundation.extension.viewBinding
 import com.anafthdev.story.ui.maps.MapsFragment
 import com.bumptech.glide.Glide
@@ -74,12 +75,14 @@ class StoryDetailFragment : Fragment(R.layout.fragment_story_detail) {
         )
 
         fabViewLocation.setOnClickListener {
-            findNavController().navigate(
-                StoryDetailFragmentDirections.actionStoryDetailFragmentToMapsFragment(
-                    story = Gson().toJson(story),
-                    action = MapsFragment.ACTION_VIEW
+            if (story != null) {
+                findNavController().navigate(
+                    StoryDetailFragmentDirections.actionStoryDetailFragmentToMapsFragment(
+                        action = MapsFragment.ACTION_VIEW,
+                        storyIds = arrayOf(story.id)
+                    )
                 )
-            )
+            } else requireContext().toast(requireContext().getString(R.string.story_not_found))
         }
     }
 }

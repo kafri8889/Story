@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
     </fragment>
     <fragment
         android:id="@+id/newStoryFragment"
@@ -101,9 +104,8 @@
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps">
         <argument
-            android:name="story"
-            app:argType="string"
-            android:defaultValue=""/>
+            android:name="storyIds"
+            app:argType="string[]"/>
         <argument
             android:name="action"
             app:argType="string"

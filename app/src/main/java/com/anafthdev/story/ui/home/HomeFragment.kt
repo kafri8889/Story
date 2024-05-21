@@ -12,6 +12,7 @@ import com.anafthdev.story.R
 import com.anafthdev.story.databinding.FragmentHomeBinding
 import com.anafthdev.story.foundation.adapter.LoadingStateAdapter
 import com.anafthdev.story.foundation.adapter.StoryRecyclerViewAdapter
+import com.anafthdev.story.foundation.extension.toast
 import com.anafthdev.story.foundation.extension.viewBinding
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,10 +27,6 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.isRefreshing.observe(viewLifecycleOwner) { isRefreshing ->
-            binding.swipeRefreshLayout.isRefreshing = isRefreshing
-        }
 
         viewModel.stories.observe(viewLifecycleOwner) { stories ->
             storyAdapter.submitData(lifecycle, stories)
@@ -50,10 +47,6 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
                             Gson().toJson(story)
                         )
                     )
-//                    try {
-//                    } catch (e: IllegalArgumentException) {
-//
-//                    }
 
                     return@setOnItemClickListener
                 }
@@ -96,6 +89,19 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
 
         fabPostStory.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNewStoryFragment())
+        }
+
+        fabMap.setOnClickListener {
+            viewModel.getStoriesWithLocation(
+                onError = {
+                    requireContext().toast(it.message!!)
+                },
+                onSuccess = { stories ->
+                    findNavController().navigate(
+                        HomeFragmentDirections.actionHomeFragmentToMapsFragment(stories.toTypedArray())
+                    )
+                }
+            )
         }
 
         swipeRefreshLayout.setOnRefreshListener {

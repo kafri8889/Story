@@ -18,8 +18,8 @@ interface StoryDao {
     @Query("SELECT * FROM stories_table")
     fun getAllStoriesAsFlow(): Flow<List<Story>>
 
-    @Query("SELECT * FROM stories_table WHERE id_stories = :storyId")
-    fun getStoryById(storyId: String): Flow<Story?>
+    @Query("SELECT * FROM stories_table WHERE id_stories IN (:storyId)")
+    fun getStoryById(vararg storyId: String): Flow<List<Story>>
 
     @Query("DELETE FROM stories_table")
     suspend fun deleteAll()

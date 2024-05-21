@@ -11,6 +11,7 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.anafthdev.story.R
@@ -18,6 +19,7 @@ import com.anafthdev.story.data.model.Story
 import com.anafthdev.story.databinding.FragmentMapsBinding
 import com.anafthdev.story.foundation.extension.toast
 import com.anafthdev.story.foundation.extension.viewBinding
+import com.anafthdev.story.foundation.util.DistanceUtil
 import com.anafthdev.story.foundation.util.PermissionUtil
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -27,16 +29,19 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.gson.Gson
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
+    private val viewModel: MapsViewModel by viewModels()
     private val binding: FragmentMapsBinding by viewBinding(FragmentMapsBinding::bind)
     private val args: MapsFragmentArgs by navArgs()
 
@@ -76,23 +81,24 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initView()
+
+        viewModel.getStories(args.storyIds)
+
+        viewModel.stories.observe(viewLifecycleOwner) { stories ->
+            if (googleMap != null && args.action == ACTION_VIEW) {
+                addMarkersAndZoom(stories)
+            }
+        }
     }
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
 
         if (args.action == ACTION_VIEW) {
-            Gson().fromJson(args.story, Story::class.java).let { story ->
-                val imageLocation = LatLng(story.lat, story.lon)
-
-                map.addMarker(
-                    MarkerOptions()
-                        .position(imageLocation)
-                        .title(requireContext().getString(R.string.image_location))
-                )
-
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(imageLocation, 15f))
+            viewModel.stories.value?.let { stories ->
+                if (stories.isNotEmpty()) addMarkersAndZoom(stories)
             }
         } else {
             map.setOnMapClickListener { latLng ->
@@ -171,6 +177,34 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
                     )
                 }
             }
+        }
+    }
+
+    /**
+     * Menampilkan semua marker dari [MapsViewModel.stories] dan zoom berdasarkan dari titik terjauh
+     */
+    private fun addMarkersAndZoom(stories: List<Story>) {
+        val furthestPoints = DistanceUtil.findFurthestPoints(
+            stories.map { LatLng(it.lat, it.lon) }
+        )
+
+        if (furthestPoints.first != null && furthestPoints.second != null) {
+            stories.forEach { story ->
+                googleMap?.addMarker(
+                    MarkerOptions()
+                        .position(LatLng(story.lat, story.lon))
+                        .title(story.description)
+                )
+            }
+
+            val bounds = LatLngBounds.Builder()
+                .include(furthestPoints.first!!)
+                .include(furthestPoints.second!!)
+                .build()
+
+            googleMap?.animateCamera(
+                CameraUpdateFactory.newLatLngBounds(bounds, 256)
+            )
         }
     }
 

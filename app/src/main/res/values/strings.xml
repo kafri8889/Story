@@ -67,4 +67,6 @@
     <string name="save">Save</string>
     <string name="my_location">My location</string>
     <string name="pick_a_location">Pick a location</string>
+    <string name="story_not_found">Story not found</string>
+    <string name="show_all_story_in_maps">Show all story in maps</string>
 </resources>

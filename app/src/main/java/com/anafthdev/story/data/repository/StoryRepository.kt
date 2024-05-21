@@ -45,7 +45,7 @@ interface StoryRepository {
 
     fun getStories(): LiveData<PagingData<Story>>
 
-    fun getStoryFromDb(id: String): Flow<Story?>
+    fun getStoryFromDb(vararg id: String): Flow<List<Story>>
 
     fun getAllStoriesFromDb(): Flow<List<Story>>
 

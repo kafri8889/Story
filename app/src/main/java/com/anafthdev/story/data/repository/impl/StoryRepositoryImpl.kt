@@ -70,8 +70,8 @@ class StoryRepositoryImpl @Inject constructor(
         ).liveData.cachedIn(CoroutineScope(SupervisorJob() + Dispatchers.Main))
     }
 
-    override fun getStoryFromDb(id: String): Flow<Story?> {
-        return storyDao.getStoryById(id)
+    override fun getStoryFromDb(vararg id: String): Flow<List<Story>> {
+        return storyDao.getStoryById(*id)
     }
 
     override fun getAllStoriesFromDb(): Flow<List<Story>> {

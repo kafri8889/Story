@@ -247,7 +247,8 @@ class NewStoryFragment : Fragment(R.layout.fragment_new_story) {
         buttonChangeLocation.setOnClickListener {
             findNavController().navigate(
                 NewStoryFragmentDirections.actionNewStoryFragmentToMapsFragment(
-                    action = MapsFragment.ACTION_PICK
+                    action = MapsFragment.ACTION_PICK,
+                    storyIds = emptyArray()
                 )
             )
         }
