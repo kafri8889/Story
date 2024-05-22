@@ -104,7 +104,7 @@
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps">
         <argument
-            android:name="storyIds"
+            android:name="stories"
             app:argType="string[]"/>
         <argument
             android:name="action"

@@ -255,7 +255,7 @@ class NewStoryFragment : Fragment(R.layout.fragment_new_story) {
             findNavController().navigate(
                 NewStoryFragmentDirections.actionNewStoryFragmentToMapsFragment(
                     action = MapsFragment.ACTION_PICK,
-                    storyIds = emptyArray()
+                    stories = emptyArray()
                 )
             )
         }

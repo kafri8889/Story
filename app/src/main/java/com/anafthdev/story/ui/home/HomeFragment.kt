@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.anafthdev.story.R
 import com.anafthdev.story.databinding.FragmentHomeBinding
 import com.anafthdev.story.foundation.adapter.LoadingStateAdapter
@@ -50,6 +51,14 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
 
     private fun initView() = with(binding) {
         storyAdapter = StoryRecyclerViewAdapter().apply {
+            registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+                override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                    if (positionStart == 0) {
+                        rvStories.smoothScrollToPosition(0)
+                    }
+                }
+            })
+
             setOnItemClickListener { pos, story, extras ->
                 val vh = rvStories.findViewHolderForAdapterPosition(pos) as? StoryRecyclerViewAdapter.StoryViewHolder
 
@@ -70,12 +79,9 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
                     )
                 )
             }
-
             addLoadStateListener {
                 swipeRefreshLayout.isRefreshing = it.refresh == LoadState.Loading
                 tvNoStories.isVisible = it.refresh is LoadState.Loading && itemCount == 0
-
-                if (it.refresh is LoadState.NotLoading) rvStories.scrollToPosition(0)
             }
         }
 
@@ -84,11 +90,13 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
             adapter = storyAdapter.withLoadStateFooter(
                 footer = LoadingStateAdapter { storyAdapter.retry() }
             )
-            postponeEnterTransition()
+
             viewTreeObserver.addOnPreDrawListener {
                 startPostponedEnterTransition()
                 true
             }
+
+            postponeEnterTransition()
         }
 
         toolbar.setOnMenuItemClickListener { menuItem ->

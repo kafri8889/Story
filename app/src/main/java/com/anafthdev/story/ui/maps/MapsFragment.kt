@@ -84,7 +84,7 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
         initView()
 
-        viewModel.getStories(args.storyIds)
+        viewModel.setStories(args.stories)
 
         viewModel.stories.observe(viewLifecycleOwner) { stories ->
             if (googleMap != null && args.action == ACTION_VIEW) {
@@ -181,9 +181,25 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
     }
 
     /**
-     * Menampilkan semua marker dari [MapsViewModel.stories] dan zoom berdasarkan dari titik terjauh
+     * Menampilkan semua marker dari [MapsViewModel.stories] dan zoom berdasarkan dari titik terjauh.
+     * Jika hanya ada 1 data, maka zoom ke titik tersebut.
      */
     private fun addMarkersAndZoom(stories: List<Story>) {
+        if (stories.size == 1) {
+            googleMap?.addMarker(
+                MarkerOptions()
+                    .position(LatLng(stories.first().lat, stories.first().lon))
+                    .title(stories.first().description)
+            )
+
+            googleMap?.animateCamera(
+                CameraUpdateFactory.newLatLngZoom(
+                    LatLng(stories.first().lat, stories.first().lon),
+                    8f
+                )
+            )
+        }
+
         val furthestPoints = DistanceUtil.findFurthestPoints(
             stories.map { LatLng(it.lat, it.lon) }
         )

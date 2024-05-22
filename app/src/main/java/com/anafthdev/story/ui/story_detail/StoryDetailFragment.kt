@@ -79,7 +79,7 @@ class StoryDetailFragment : Fragment(R.layout.fragment_story_detail) {
                 findNavController().navigate(
                     StoryDetailFragmentDirections.actionStoryDetailFragmentToMapsFragment(
                         action = MapsFragment.ACTION_VIEW,
-                        storyIds = arrayOf(story.id)
+                        stories = arrayOf(Gson().toJson(story))
                     )
                 )
             } else requireContext().toast(requireContext().getString(R.string.story_not_found))

@@ -28,13 +28,17 @@ class HomeViewModel @Inject constructor(
             try {
                 val response = storyRepository.stories(
                     mapOf(
-                        "size" to 30,
+                        "size" to 50,
                         "location" to 1
                     )
                 )
 
                 if (response.isSuccessful && response.body() != null) {
-                    onSuccess(response.body()!!.listStory.filter { it.lat != 0.0 && it.lon != 0.0 }.map { it.id })
+                    onSuccess(
+                        response.body()!!
+                            .listStory
+                            .map { Gson().toJson(it) }
+                    )
                 } else {
                     val errorResponse = Gson().fromJson(
                         response.errorBody()?.string(),
